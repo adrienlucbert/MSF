@@ -31,6 +31,7 @@ struct msf_scene_s {
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*

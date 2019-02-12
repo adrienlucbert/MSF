@@ -42,3 +42,18 @@ void list_apply(void *begin, void (*func)(void *))
     };
     func((void *)curr);
 }
+
+void *list_fetch(void *begin, char *label)
+{
+    node_t *tmp = (node_t *)begin;
+
+    while (tmp->next != begin) {
+        if (my_memcmp(tmp->label, label, -1) == 0)
+            return (tmp);
+        tmp = (node_t *)tmp->next;
+    }
+    if (my_memcmp(tmp->label, label, -1) == 0)
+        return (tmp);
+    else
+        return (NULL);
+}

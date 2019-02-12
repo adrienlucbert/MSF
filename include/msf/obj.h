@@ -72,13 +72,12 @@ struct msf_game_obj_s {
     sfVector2f pos;
     float rotation;
     obj_render_method render;
-    obj_mouse_evt_t mouse_evt;
+    obj_mouse_evt_t *mouse_evt;
 
     // msf_node_s inherited properties
     char *label;
-    void *data;
     void *next;
-    void (*dtor)(void *node);
+    void (*dtor)(void *);
 };
 
 /*
@@ -105,11 +104,12 @@ struct msf_text_obj_s {
     sfVector2f pos;
     float rotation;
     obj_render_method render;
-    obj_mouse_evt_t mouse_evt;
+    obj_mouse_evt_t *mouse_evt;
 
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*
@@ -128,11 +128,12 @@ struct msf_animated_obj_s {
     sfVector2f pos;
     float rotation;
     obj_render_method render;
-    obj_mouse_evt_t mouse_evt;
+    obj_mouse_evt_t *mouse_evt;
 
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*
@@ -155,6 +156,7 @@ struct msf_anim_s {
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*
@@ -173,11 +175,12 @@ struct msf_input_obj_s {
     sfVector2f pos;
     float rotation;
     obj_render_method render;
-    obj_mouse_evt_t mouse_evt;
+    obj_mouse_evt_t *mouse_evt;
 
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*
@@ -189,17 +192,34 @@ void *obj_ctor(void *obj, obj_type type);
 void obj_dtor(void *obj);
 void obj_destroy(void *obj);
 
+// OBJ MOUSE EVT TOR
+void *obj_mouse_evt_new(void);
+void *obj_mouse_evt_ctor(void *mouse_evt);
+void obj_mouse_evt_destroy(void *mouse_evt);
+
 // TEXT TOR
+void *text_obj_new(char *str);
+void *text_obj_ctor(void *text_obj, char *str);
+void text_obj_dtor(void *text_obj);
+void text_obj_destroy(void *text_obj);
 
 // TEXT MET
 void obj_text_render(hub_t *hub, void *obj);
 
 // ANIMATED TOR
+void *anim_obj_new(void);
+void *anim_obj_ctor(void *anim_obj);
+void anim_obj_dtor(void *anim_obj);
+void anim_obj_destroy(void *anim_obj);
 
 // ANIMATED MET
 void obj_animated_render(hub_t *hub, void *obj);
 
 // INPUT TOR
+void *input_obj_new(void);
+void *input_obj_ctor(void *input_obj);
+void input_obj_dtor(void *input_obj);
+void input_obj_destroy(void *input_obj);
 
 // INPUT MET
 void obj_input_render(hub_t *hub, void *obj);

@@ -23,6 +23,7 @@ void *evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope)
     FAIL_IF(!st_evt, NULL);
     st_evt->scope = scope;
     st_evt->evt = fn;
+    st_evt->dtor = NULL;
     return (evt);
 }
 

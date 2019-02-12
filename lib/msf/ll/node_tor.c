@@ -34,6 +34,9 @@ void node_dtor(void *node)
         free(st_node->label);
         st_node->label = NULL;
     }
+    if (st_node->dtor) {
+        st_node->dtor(node);
+    }
 }
 
 void node_destroy(void *node)

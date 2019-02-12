@@ -25,6 +25,7 @@ void *scene_ctor(void *scene)
     st_scene->evts = NULL;
     st_scene->cam_pos = vectorf_new(0, 0);
     st_scene->cam_speed = vectorf_new(0, 0);
+    st_scene->dtor = scene_dtor;
     return (scene);
 }
 

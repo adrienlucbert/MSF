@@ -24,6 +24,7 @@
 struct msf_node_s {
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*
@@ -42,5 +43,6 @@ void node_pop(void *node);
 void *list_append(void *begin, void *node);
 void list_destroy(void *begin);
 void list_apply(void *begin, void (*func)(void *));
+void *list_fetch(void *begin, char *label);
 
 #endif /* !MSF_LL_H_ */

@@ -34,6 +34,7 @@ struct msf_game_evt_s {
     // msf_node_s inherited properties
     char *label;
     void *next;
+    void (*dtor)(void *);
 };
 
 /*

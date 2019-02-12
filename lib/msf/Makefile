@@ -18,12 +18,13 @@ SRC			=	ll/list_met.c				\
 				scene/scene_tor.c			\
 				scene/scene_met.c			\
 				obj/obj_tor.c				\
+				obj/mouse_evt.c				\
 				obj/text/text_tor.c			\
 				obj/text/text_met.c			\
 				obj/input/input_tor.c		\
 				obj/input/input_met.c		\
 				obj/animated/animated_tor.c	\
-				obj/animated/animated_met.c
+				obj/animated/animated_met.c	\
 
 OBJ			=	$(SRC:.c=.o)
 
