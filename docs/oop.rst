@@ -17,7 +17,7 @@ La classe est la définition d'un type d'objet. Ainsi, chaque objet est une
 instance de la classe dont il dépend.
 
 Mieux avec un exemple...
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Dans un RPG, on définit un personnage, entre autres, par son nom et ses points 
 de vie.
@@ -67,7 +67,7 @@ leur définition, mais dont les propriétés ont des valeurs différentes.
 Chaque instance peut évoluer indépendemment des autres.
 
 Notion d'héritage
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Une dernière notion à aborder avant de rentrer dans le vif du sujet: l'héritage.
 Plusieurs classes peuvent être très proches, avoir seulement quelques 
@@ -106,7 +106,7 @@ Prenons l'exemple de personnages de RPG:
         grogner();
 
 Ca donne quoi en C?
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Le C n'est pas connu pour être un langage orienté objet... Et pour cause, le C 
 n'offre aucun support du concept d'objet. Il est en revanche possible de s'en 
