@@ -25,10 +25,10 @@ void *hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     size = size;
     style = style;
     st_hub->window = window_new(title, size, style);
-    st_hub->global_evt = NULL;
+    st_hub->global_evts = NULL;
     st_hub->framerate = 60;
     st_hub->timer = sfClock_create();
-    st_hub->scene = NULL;
+    st_hub->scenes = NULL;
     return (hub);
 }
 
@@ -38,8 +38,8 @@ void hub_dtor(void *hub)
 
     window_destroy(st_hub->window);
     sfClock_destroy(st_hub->timer);
-    list_destroy(st_hub->global_evt);
-    list_destroy(st_hub->scene);
+    list_destroy(st_hub->global_evts);
+    list_destroy(st_hub->scenes);
 }
 
 void hub_destroy(void *hub)

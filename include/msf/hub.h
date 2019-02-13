@@ -15,17 +15,17 @@
 /*
 **  Game Hub
 **      window      game window
-**      global_evt  list of non-scene-dependent events
+**      global_evts  list of non scene-dependent events
 **      framerate   game framerate (in frames per second)
 **      timer       hub timer to handle framerate
-**      scene       list of scenes of the game
+**      scenes       list of scenes of the game
 */
 struct msf_hub_s {
     sfRenderWindow *window;
-    void *global_evt;
+    void *global_evts;
     uint framerate;
     sfClock *timer;
-    void *scene;
+    void *scenes;
 };
 
 /*

@@ -21,7 +21,7 @@ void *node_ctor(void *node, char *label, void *next)
     node_t *st_node = (node_t *)node;
 
     FAIL_IF(!st_node, NULL);
-    st_node->label = my_memdup(label, -1);
+    st_node->label = label == NULL ? NULL : my_memdup(label, -1);
     st_node->next = next == NULL ? st_node : next;
     return (node);
 }
