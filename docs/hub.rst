@@ -6,9 +6,9 @@ Description
 
 Le Game Hub est un conteneur pour toutes les données du jeu.
 
-.. admonition:: Type
+.. note::
 
-   **hub_t**
+   Le type du Game Hub est **hub_t**.
 
 Données
 -------
@@ -73,7 +73,7 @@ Ajoute une scène à la fin de la liste scenes du hub.
 	**Paramètres**
 		:hub: :c:type:`void *` - hub auquel ajouter la scène.
 
-		:scene: :c:type:`void *` - scène à ajouter au hub
+		:scene: :c:type:`void *` - scène à ajouter au hub.
 
 		:label: :c:type:`char *` - Identifiant de la scène. Laisser à NULL pour ne pas définir d'identifiant.
 

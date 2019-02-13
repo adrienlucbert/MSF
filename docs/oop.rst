@@ -27,7 +27,7 @@ propriétés :
     - nom
     - pts_vie
 
-.. admonition:: Remember
+.. note::
 
    Par convention, le nom d'une classe commence par une majuscule.
 
@@ -49,7 +49,7 @@ On peut donc compléter notre classe avec ses méthodes :
 Notre programme sait maintenant ce qu'est qu'un personnage, on peut lui 
 demander d'en créer!
 
-.. admonition:: Tips
+.. tip::
 
    La plupart des langages orientés objet utilisent le mot-clé **new** pour 
    créer une instance d'une classe (donc un objet).
