@@ -11,13 +11,16 @@ SRC			=	ll/list_met.c				\
 				vector.c					\
 				hub/hub_tor.c				\
 				hub/hub_met.c				\
+				hub/hub_set.c				\
 				hub/window_tor.c			\
 				hub/window_met.c			\
 				hub/global_evts.c			\
 				evt/evt_tor.c				\
 				scene/scene_tor.c			\
 				scene/scene_met.c			\
+				scene/scene_set.c			\
 				obj/obj_tor.c				\
+				obj/obj_set.c				\
 				obj/mouse_evt.c				\
 				obj/text/text_tor.c			\
 				obj/text/text_met.c			\

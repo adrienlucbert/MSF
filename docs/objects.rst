@@ -37,7 +37,6 @@ Données
     :state: :c:type:`sfBool` - état de l'objet (actif ou inactif). Si l'objet est inactif, il ne sera pas rendu.
     :speed: :c:type:`sfVector2f` - vecteur de déplacement de l'objet.
     :pos: :c:type:`sfVector2f` - position de l'objet dans la scène.
-    :rotation: :c:type:`float` - rotation de l'objet.
     :render: :c:type:`void (*)(hub_t *, void *)` - fonction de rendu de l'objet.
     :mouse_evt: :c:type:`obj_mouse_evt_t` - état de l'objet par rapport aux événement de la souris:
 
@@ -80,6 +79,43 @@ Détruit un objet et son contenu
 	**Paramètres**
 		:obj: :c:type:`void *` - objet à détruire.
 
+Setters
+~~~~~~~
+
+.. c:function:: void obj_set_group(void *obj, int group);
+
+Modifie le groupe d'un objet.
+
+	**Paramètres**
+		:obj: :c:type:`void *` - objet dont on modifie le groupe.
+		:group: :c:type:`int` - nouveau groupe.
+
+.. c:function:: void obj_set_state(void *obj, sfBool state);
+
+Modifie l'état d'un objet.
+
+	**Paramètres**
+		:obj: :c:type:`void *` - objet dont on modifie l'état.
+		:state: :c:type:`sfBool` - nouvel état de l'objet.
+
+.. c:function:: void obj_set_speed(void *obj, float sx, float sy);
+
+Modifie la vitesse d'un objet.
+
+	**Paramètres**
+		:obj: :c:type:`void *` - objet dont on modifie la vitesse.
+		:sx: :c:type:`float` - vitesse de l'objet (en x).
+		:sy: :c:type:`float` - vitesse de l'objet (en y).
+
+.. c:function:: obj_set_pos(void *obj, float x, float y);
+
+Modifie la position d'un objet.
+
+	**Paramètres**
+		:obj: :c:type:`void *` - objet dont on modifie la position.
+		:x: :c:type:`float` - position de l'objet (en x).
+		:y: :c:type:`float` - position de l'objet (en y).
+
 text_obj_t: objet texte
 =======================
 
@@ -107,7 +143,6 @@ Données
         :state: :c:type:`sfBool` - état de l'objet (actif ou inactif). Si l'objet est inactif, il ne sera pas rendu.
         :speed: :c:type:`sfVector2f` - vecteur de déplacement de l'objet.
         :pos: :c:type:`sfVector2f` - position de l'objet dans la scène.
-        :rotation: :c:type:`float` - rotation de l'objet.
         :render: :c:type:`void (*)(hub_t *, void *)` - fonction de rendu de l'objet.
         :mouse_evt: :c:type:`obj_mouse_evt_t` - état de l'objet par rapport aux événement de la souris:
 
@@ -169,7 +204,6 @@ Données
         :state: :c:type:`sfBool` - état de l'objet (actif ou inactif). Si l'objet est inactif, il ne sera pas rendu.
         :speed: :c:type:`sfVector2f` - vecteur de déplacement de l'objet.
         :pos: :c:type:`sfVector2f` - position de l'objet dans la scène.
-        :rotation: :c:type:`float` - rotation de l'objet.
         :render: :c:type:`void (*)(hub_t *, void *)` - fonction de rendu de l'objet.
         :mouse_evt: :c:type:`obj_mouse_evt_t` - état de l'objet par rapport aux événement de la souris:
 
@@ -228,7 +262,6 @@ Données
         :state: :c:type:`sfBool` - état de l'objet (actif ou inactif). Si l'objet est inactif, il ne sera pas rendu.
         :speed: :c:type:`sfVector2f` - vecteur de déplacement de l'objet.
         :pos: :c:type:`sfVector2f` - position de l'objet dans la scène.
-        :rotation: :c:type:`float` - rotation de l'objet.
         :render: :c:type:`void (*)(hub_t *, void *)` - fonction de rendu de l'objet.
         :mouse_evt: :c:type:`obj_mouse_evt_t` - état de l'objet par rapport aux événement de la souris:
 

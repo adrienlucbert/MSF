@@ -60,7 +60,6 @@ struct msf_obj_mouse_evt_s {
 **      state       whether object is dead or alive (to be rendered or not)
 **      speed       move speed of the object
 **      pos         position of the object in the scene
-**      rotation    rotation angle of the object
 **      display     display function for the object (depending on its type)
 */
 struct msf_game_obj_s {
@@ -70,7 +69,6 @@ struct msf_game_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    float rotation;
     obj_render_method render;
     obj_mouse_evt_t *mouse_evt;
 
@@ -102,7 +100,6 @@ struct msf_text_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    float rotation;
     obj_render_method render;
     obj_mouse_evt_t *mouse_evt;
 
@@ -126,7 +123,6 @@ struct msf_animated_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    float rotation;
     obj_render_method render;
     obj_mouse_evt_t *mouse_evt;
 
@@ -149,6 +145,7 @@ struct msf_anim_s {
     sfSprite *sprite;
     sfVector2f scale;
     sfVector2f origin;
+    float rotation;
     uint frame_duration;
     sfClock *timer;
     void *frames;
@@ -186,7 +183,6 @@ struct msf_input_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    float rotation;
     obj_render_method render;
     obj_mouse_evt_t *mouse_evt;
 
@@ -204,6 +200,12 @@ void *obj_new(obj_type type);
 void *obj_ctor(void *obj, obj_type type);
 void obj_dtor(void *obj);
 void obj_destroy(void *obj);
+
+// OBJ SETTERS
+void obj_set_group(void *obj, int group);
+void obj_set_state(void *obj, sfBool state);
+void obj_set_speed(void *obj, float sx, float sy);
+void obj_set_pos(void *obj, float x, float y);
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);

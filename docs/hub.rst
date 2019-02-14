@@ -31,9 +31,7 @@ Crée un nouveau hub.
 
 	**Paramètres**
 		:title: :c:type:`char *` - titre de la fenêtre de jeu.
-
 		:size: :c:type:`sfVector2i` - dimensions de la fenêtre.
-
 		:style: :c:type:`sfUint32` - Vous devez utiliser au moins une des options ci-dessous :
 
 			* ``sfNone`` : Aucune option de style ne sera utilisée.
@@ -61,9 +59,7 @@ Ajoute un événement à la fin de la liste global_evts du hub.
 
 	**Paramètres**
 		:hub: :c:type:`void *` - hub auquel ajouter l'événement.
-
 		:global_evt: :c:type:`void *` - événement à ajouter au hub.
-
 		:label: :c:type:`char *` - Identifiant de l'événement. Laisser à NULL pour ne pas définir d'identifiant.
 
 .. c:function:: void hub_add_scene(void *hub, void *scene, char *label);
@@ -72,10 +68,19 @@ Ajoute une scène à la fin de la liste scenes du hub.
 
 	**Paramètres**
 		:hub: :c:type:`void *` - hub auquel ajouter la scène.
-
 		:scene: :c:type:`void *` - scène à ajouter au hub.
-
 		:label: :c:type:`char *` - Identifiant de la scène. Laisser à NULL pour ne pas définir d'identifiant.
+
+Setters
+~~~~~~~
+
+.. c:function:: void hub_set_framerate(void *hub, unsigned int framerate);
+
+Modifie le framerate du hub.
+
+	**Paramètres**
+		:hub: :c:type:`void *` - hub dont on modifie le framerate.
+		:framerate: :c:type:`unsigned int` - nouveau framerate.
 
 Utilisation
 ~~~~~~~~~~~

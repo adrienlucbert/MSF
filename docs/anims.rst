@@ -16,6 +16,7 @@ Données
     :sprite: :c:type:`sfSprite *` - élément CSFML de sprite.
     :scale: :c:type:`sfVector2f` - échelle de rendu de l'animation (taille proportionnelle).
     :origin: :c:type:`sfVector2f` - origine des transformations.
+    :rotation: :c:type:`float` - rotation de l'image.
     :frame_duration: :c:type:`unsigned int` - durée d'une frame dans l'animation.
     :timer: :c:type:`sfClock *` - clock servant à gérer le défilement des frames.
     :frames: :c:type:`void *` - listes des textures (frames).

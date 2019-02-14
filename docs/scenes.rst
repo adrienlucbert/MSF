@@ -70,3 +70,24 @@ Ajoute un objet à la fin de la liste objs d'une scène.
 		:obj: :c:type:`void *` - objet à ajouter à la scène.
 
 		:label: :c:type:`char *` - Identifiant de l'objet. Laisser à NULL pour ne pas définir d'identifiant.
+
+Setters
+~~~~~~~
+
+.. c:function:: void scene_set_cam_speed(void *scene, float sx, float sy);
+
+Modifie la vitesse de caméra d'une scène.
+
+	**Paramètres**
+		:scene: :c:type:`void *` - scene dont on modifie la vitesse de caméra.
+		:sx: :c:type:`float` - vitesse de la caméra (en x).
+		:sy: :c:type:`float` - vitesse de la caméra (en y).
+
+.. c:function:: void scene_set_cam_pos(void *scene, float x, float y);
+
+Modifie la position de la caméra d'une scène.
+
+	**Paramètres**
+		:scene: :c:type:`void *` - scene dont on modifie la position de la caméra.
+		:x: :c:type:`float` - position de la caméra (en x).
+		:y: :c:type:`float` - position de la caméra (en y).

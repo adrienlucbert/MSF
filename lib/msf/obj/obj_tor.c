@@ -39,7 +39,6 @@ void *obj_ctor(void *obj, obj_type type)
     st_obj->state = sfTrue;
     st_obj->speed = vectorf_new(0, 0);
     st_obj->pos = vectorf_new(0, 0);
-    st_obj->rotation = 0;
     st_obj->render = get_obj_render_method(type);
     st_obj->mouse_evt = obj_mouse_evt_new();
     st_obj->dtor = obj_dtor;
