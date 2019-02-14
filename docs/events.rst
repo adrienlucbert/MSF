@@ -14,8 +14,9 @@ Données
 -------
 
     :scope: :c:type:`evt_scope` - domaine d'activation de l'événement :
+
         * ``context`` : condition de l'événement vérifiée à chaque actualisation du rendu du jeu.
-		* ``inputs`` : condition de l'événement vérifiée à chaque fois que le jeu reçoit un input (clavier, souris, etc...).
+	* ``inputs`` : condition de l'événement vérifiée à chaque fois que le jeu reçoit un input (clavier, souris, etc...).
     :evt: :c:type:`void (*)(hub_t *, sfEvent)` - fonction appelée par l'événement.
 
     .. admonition:: Propriétés héritées de node_t
@@ -38,8 +39,9 @@ Crée un nouvel événement.
 		:fn: :c:type:`void (*)(hub_t *, sfEvent)` - fonction appelée par l'événement.
 
 		:scope: :c:type:`evt_scope` - domaine d'activation de l'événement :
-            * ``context`` : condition de l'événement vérifiée à chaque actualisation du rendu du jeu.
-            * ``inputs`` : condition de l'événement vérifiée à chaque fois que le jeu reçoit un input (clavier, souris, etc...).
+
+                * ``context`` : condition de l'événement vérifiée à chaque actualisation du rendu du jeu.
+                * ``inputs`` : condition de l'événement vérifiée à chaque fois que le jeu reçoit un input (clavier, souris, etc...).
 
 	**Valeur de retour**
 		:c:type:`void *` - événement

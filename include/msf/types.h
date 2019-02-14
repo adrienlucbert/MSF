@@ -19,6 +19,7 @@ typedef struct msf_obj_mouse_evt_s  obj_mouse_evt_t;
 typedef struct msf_anim_s           anim_t;
 typedef struct msf_node_s           node_t;
 typedef struct msf_anim_s           anim_t;
+typedef struct msf_frame_s          frame_t;
 typedef enum msf_obj_type_e         obj_type;
 typedef enum msf_obj_fixing_e       obj_fixing;
 typedef enum msf_evt_scope_e        evt_scope;

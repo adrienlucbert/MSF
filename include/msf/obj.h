@@ -160,6 +160,19 @@ struct msf_anim_s {
 };
 
 /*
+**  Frame
+**      texture         texture of the frame
+*/
+struct msf_frame_s {
+    sfTexture *texture;
+
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+};
+
+/*
 **  Input Game Object
 **      value       input value
 */

@@ -14,11 +14,12 @@ Table des matières
 
    oop
    ll
-   hub
    diagram
+   hub
    events
    scenes
    objects
+   anims
 
 Introduction
 ------------
