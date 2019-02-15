@@ -16,15 +16,15 @@ void *input_obj_new(void)
     return ((void *)st_input_obj);
 }
 
-void *input_obj_ctor(void *input_obj)
+void input_obj_ctor(void *input_obj)
 {
     input_obj_t *st_input_obj = (input_obj_t *)input_obj;
 
-    FAIL_IF(!st_input_obj, NULL);
+    FAIL_IF_VOID(!st_input_obj);
     obj_ctor(st_input_obj, text);
     st_input_obj->value = NULL;
+    st_input_obj->render = input_obj_render;
     st_input_obj->dtor = input_obj_dtor;
-    return (input_obj);
 }
 
 void input_obj_dtor(void *input_obj)

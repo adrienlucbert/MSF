@@ -28,11 +28,6 @@ enum msf_obj_fixing_e {
 };
 
 /*
-**  TYPES
-*/
-typedef void (*obj_render_method)(hub_t *, void *);
-
-/*
 **  STRUCTS
 */
 
@@ -63,19 +58,19 @@ struct msf_obj_mouse_evt_s {
 **      display     display function for the object (depending on its type)
 */
 struct msf_game_obj_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
     obj_fixing fixing;
     obj_type type;
     int group;
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    obj_render_method render;
+    void (*render)(hub_t *, void *);
     obj_mouse_evt_t *mouse_evt;
-
-    // msf_node_s inherited properties
-    char *label;
-    void *next;
-    void (*dtor)(void *);
 };
 
 /*
@@ -87,11 +82,10 @@ struct msf_game_obj_s {
 **      str         string to be written
 */
 struct msf_text_obj_s {
-    sfText *text;
-    sfFont *font;
-    sfColor color;
-    uint char_size;
-    char *str;
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
 
     // msf_game_obj_s inherited properties
     obj_fixing fixing;
@@ -100,13 +94,14 @@ struct msf_text_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    obj_render_method render;
+    void (*render)(hub_t *, void *);
     obj_mouse_evt_t *mouse_evt;
 
-    // msf_node_s inherited properties
-    char *label;
-    void *next;
-    void (*dtor)(void *);
+    sfText *text;
+    sfFont *font;
+    sfColor color;
+    uint char_size;
+    char *str;
 };
 
 /*
@@ -114,7 +109,10 @@ struct msf_text_obj_s {
 **      anims       list of animations
 */
 struct msf_animated_obj_s {
-    void *anims;
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
 
     // msf_game_obj_s inherited properties
     obj_fixing fixing;
@@ -123,13 +121,10 @@ struct msf_animated_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    obj_render_method render;
+    void (*render)(hub_t *, void *);
     obj_mouse_evt_t *mouse_evt;
 
-    // msf_node_s inherited properties
-    char *label;
-    void *next;
-    void (*dtor)(void *);
+    void *anims;
 };
 
 /*
@@ -142,6 +137,11 @@ struct msf_animated_obj_s {
 **      frames          list of animation's frames
 */
 struct msf_anim_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
     sfSprite *sprite;
     sfVector2f scale;
     sfVector2f origin;
@@ -149,11 +149,6 @@ struct msf_anim_s {
     uint frame_duration;
     sfClock *timer;
     void *frames;
-
-    // msf_node_s inherited properties
-    char *label;
-    void *next;
-    void (*dtor)(void *);
 };
 
 /*
@@ -161,12 +156,12 @@ struct msf_anim_s {
 **      texture         texture of the frame
 */
 struct msf_frame_s {
-    sfTexture *texture;
-
     // msf_node_s inherited properties
     char *label;
     void *next;
     void (*dtor)(void *);
+
+    sfTexture *texture;
 };
 
 /*
@@ -174,7 +169,10 @@ struct msf_frame_s {
 **      value       input value
 */
 struct msf_input_obj_s {
-    void *value;
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
 
     // msf_game_obj_s inherited properties
     obj_fixing fixing;
@@ -183,13 +181,10 @@ struct msf_input_obj_s {
     sfBool state;
     sfVector2f speed;
     sfVector2f pos;
-    obj_render_method render;
+    void (*render)(hub_t *, void *);
     obj_mouse_evt_t *mouse_evt;
 
-    // msf_node_s inherited properties
-    char *label;
-    void *next;
-    void (*dtor)(void *);
+    void *value;
 };
 
 /*
@@ -197,9 +192,12 @@ struct msf_input_obj_s {
 */
 // OBJ TOR
 void *obj_new(obj_type type);
-void *obj_ctor(void *obj, obj_type type);
+void obj_ctor(void *obj, obj_type type);
 void obj_dtor(void *obj);
 void obj_destroy(void *obj);
+
+// OBJ MET
+void obj_render(void *obj, void *hub);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
@@ -209,34 +207,62 @@ void obj_set_pos(void *obj, float x, float y);
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);
-void *obj_mouse_evt_ctor(void *mouse_evt);
+void obj_mouse_evt_ctor(void *mouse_evt);
 void obj_mouse_evt_destroy(void *mouse_evt);
 
 // TEXT TOR
 void *text_obj_new(char *str);
-void *text_obj_ctor(void *text_obj, char *str);
+void text_obj_ctor(void *text_obj, char *str);
 void text_obj_dtor(void *text_obj);
 void text_obj_destroy(void *text_obj);
 
 // TEXT MET
-void obj_text_render(hub_t *hub, void *obj);
+void text_obj_render(hub_t *hub, void *text_obj);
+
+// TEXT SETTERS
+void text_obj_set_font(void *text_obj, char *fontpath);
+void text_obj_set_color(void *text_obj, sfColor color);
+void text_obj_set_char_size(void *text_obj, uint char_size);
+void text_obj_set_string(void *text_obj, char *str);
 
 // ANIMATED TOR
 void *anim_obj_new(void);
-void *anim_obj_ctor(void *anim_obj);
+void anim_obj_ctor(void *anim_obj);
 void anim_obj_dtor(void *anim_obj);
 void anim_obj_destroy(void *anim_obj);
 
 // ANIMATED MET
-void obj_animated_render(hub_t *hub, void *obj);
+void anim_obj_add_anim(void *obj, void *anim, char *label);
+void anim_obj_render(hub_t *hub, void *anim_obj);
+
+// ANIM TOR
+void *anim_new(char *filepath, int nb_frames, uint frame_duration);
+void anim_ctor(void *anim, char *filepath, int nb_frames, uint frame_duration);
+void anim_dtor(void *anim);
+void anim_destroy(void *anim);
+
+// ANIM MET
+void anim_add_frame(void *anim, void *frame, char *label);
+
+// ANIM SETTERS
+void anim_set_frames(void *anim, char *filepath, int nb_frames);
+
+// FRAME TOR
+void *frame_new(sfTexture *texture);
+void frame_ctor(void *frame, sfTexture *texture);
+void frame_dtor(void *frame);
+void frame_destroy(void *frame);
 
 // INPUT TOR
 void *input_obj_new(void);
-void *input_obj_ctor(void *input_obj);
+void input_obj_ctor(void *input_obj);
 void input_obj_dtor(void *input_obj);
 void input_obj_destroy(void *input_obj);
 
 // INPUT MET
-void obj_input_render(hub_t *hub, void *obj);
+void input_obj_render(hub_t *hub, void *input_obj);
+
+// INPUT SET
+void input_obj_set_value(void *input_obj, void *value);
 
 #endif /* !MSF_OBJ_H_ */

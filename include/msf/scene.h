@@ -23,15 +23,15 @@
 **      cam_pos     position of the scene camera
 */
 struct msf_scene_s {
-    void *objs;
-    void *evts;
-    sfVector2f cam_speed;
-    sfVector2f cam_pos;
-
     // msf_node_s inherited properties
     char *label;
     void *next;
     void (*dtor)(void *);
+
+    void *objs;
+    void *evts;
+    sfVector2f cam_speed;
+    sfVector2f cam_pos;
 };
 
 /*
@@ -39,7 +39,7 @@ struct msf_scene_s {
 */
 // SCENE TOR
 void *scene_new(void);
-void *scene_ctor(void *scene);
+void scene_ctor(void *scene);
 void scene_dtor(void *scene);
 void scene_destroy(void *scene);
 

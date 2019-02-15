@@ -181,6 +181,41 @@ Détruit un objet texte et son contenu
 	**Paramètres**
 		:obj: :c:type:`void *` - objet texte à détruire.
 
+Setters
+~~~~~~~
+
+.. c:function:: void text_obj_set_font(void *text_obj, char *fontpath);
+
+Modifie la police d'un objet texte.
+
+	**Paramètres**
+		:text_obj: :c:type:`void *` - objet texte dont on modifie la police.
+		:fontpath: :c:type:`char *` - chemin du fichier de la police d'écriture.
+
+.. c:function:: void text_obj_set_color(void *text_obj, sfColor color);
+
+Modifie la couleur d'un objet texte.
+
+	**Paramètres**
+		:text_obj: :c:type:`void *` - objet texte dont on modifie la couleur.
+		:color: :c:type:`sfColor` - nouvelle couleur de l'objet texte.
+
+.. c:function:: void text_obj_set_char_size(void *text_obj, unsigned int char_size);
+
+Modifie la taille de caractère d'un objet texte.
+
+	**Paramètres**
+		:text_obj: :c:type:`void *` - objet texte dont on modifie la taille de caractère.
+		:char_size: :c:type:`unsigned int` - nouvelle taille de caractère de l'objet texte.
+
+.. c:function:: void text_obj_set_string(void *text_obj, char *str);
+
+Modifie la chaîne de caractères d'un objet texte.
+
+	**Paramètres**
+		:text_obj: :c:type:`void *` - objet texte dont on modifie la chaîne de caractères.
+		:str: :c:type:`char *` - nouvelle chaîne de caractère de l'objet texte.
+
 anim_obj_t: objet animé
 =======================
 
@@ -296,3 +331,15 @@ Détruit un objet input et son contenu
 
 	**Paramètres**
 		:input_obj: :c:type:`void *` - objet input à détruire.
+
+Setters
+~~~~~~~
+
+.. c:function:: void input_obj_set_value(void *input_obj, void *value);
+
+Modifie la valeur d'un objet input.
+
+	**Paramètres**
+		:input_obj: :c:type:`void *` - objet input dont on modifie la valeur.
+		:value: :c:type:`void *` - nouvelle valeur de l'objet input.
+

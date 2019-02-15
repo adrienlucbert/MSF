@@ -16,11 +16,11 @@ void *hub_new(char *title, sfVector2i size, sfUint32 style)
     return ((void *)st_hub);
 }
 
-void *hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
+void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
 {
     hub_t *st_hub = (hub_t *)hub;
 
-    FAIL_IF(!st_hub, NULL);
+    FAIL_IF_VOID(!st_hub);
     title = title;
     size = size;
     style = style;
@@ -29,7 +29,6 @@ void *hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     st_hub->framerate = 60;
     st_hub->timer = sfClock_create();
     st_hub->scenes = NULL;
-    return (hub);
 }
 
 void hub_dtor(void *hub)

@@ -198,18 +198,18 @@ simplifier et raccourcir ce tutoriel), héritant de la classe Personnage.
     void gobelin_grogner(void);
 
     struct gobelin_s {
-        # own properties
-        char *nom_clan;
-
-        # own methods
-        void (*grogner)(void);
-
         # properties inherited from personnage_t
         char *nom;
         int pts_vie;
 
         # methods inherited from personnage_t
         void (*attaquer)(void *cible);
+
+        # own properties
+        char *nom_clan;
+
+        # own methods
+        void (*grogner)(void);
     }
 
     /* /HEADER */

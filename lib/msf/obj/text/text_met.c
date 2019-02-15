@@ -7,8 +7,8 @@
 
 #include "msf/msf.h"
 
-void obj_text_render(hub_t *hub, void *obj)
+void text_obj_render(hub_t *hub, void *text_obj)
 {
     hub = hub;
-    obj = obj;
+    text_obj = text_obj;
 }

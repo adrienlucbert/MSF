@@ -16,15 +16,14 @@ void *evt_new(void (*fn)(hub_t *, sfEvent), evt_scope scope)
     return ((void *)st_evt);
 }
 
-void *evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope)
+void evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope)
 {
     evt_t *st_evt = (evt_t *)evt;
 
-    FAIL_IF(!st_evt, NULL);
+    FAIL_IF_VOID(!st_evt);
     st_evt->scope = scope;
     st_evt->evt = fn;
     st_evt->dtor = NULL;
-    return (evt);
 }
 
 void evt_destroy(void *evt)

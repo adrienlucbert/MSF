@@ -16,14 +16,13 @@ void *node_new(char *label, void *next)
     return ((void *)st_node);
 }
 
-void *node_ctor(void *node, char *label, void *next)
+void node_ctor(void *node, char *label, void *next)
 {
     node_t *st_node = (node_t *)node;
 
-    FAIL_IF(!st_node, NULL);
+    FAIL_IF_VOID(!st_node);
     st_node->label = label == NULL ? NULL : my_memdup(label, -1);
     st_node->next = next == NULL ? st_node : next;
-    return (node);
 }
 
 void node_dtor(void *node)

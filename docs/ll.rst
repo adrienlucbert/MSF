@@ -51,12 +51,12 @@ Détruit un node et son contenu (à l'aide du dtor). Retire le node de la liste 
 Utilisation
 ~~~~~~~~~~~
 
-.. c:function:: void *list_append(void *begin, void *node);
+.. c:function:: void *list_append(void **begin, void *node);
 
 Ajoute un node à la fin d'une liste
 
 	**Paramètres**
-		:begin: :c:type:`void *` - node de début de la liste.
+		:begin: :c:type:`void **` - adresse du node de début de la liste.
 		:node: :c:type:`void *` - node à ajouter à la liste.
 
     **Valeur de retour**

@@ -11,8 +11,7 @@ void window_render(hub_t *hub)
 {
     sfInt64 delay = sfClock_getElapsedTime(hub->timer).microseconds;
 
-    if (hub->scenes == NULL)
-        return;
+    FAIL_IF_VOID(!hub->scenes);
     if (delay / 1000 >= 1000 / hub->framerate) {
         // scene_refresh(hub);
         sfClock_restart(hub->timer);

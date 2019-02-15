@@ -16,15 +16,15 @@ void *anim_obj_new(void)
     return ((void *)st_anim_obj);
 }
 
-void *anim_obj_ctor(void *anim_obj)
+void anim_obj_ctor(void *anim_obj)
 {
     anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
 
-    FAIL_IF(!st_anim_obj, NULL);
+    FAIL_IF_VOID(!st_anim_obj);
     obj_ctor(st_anim_obj, animated);
     st_anim_obj->anims = NULL;
+    st_anim_obj->render = anim_obj_render;
     st_anim_obj->dtor = anim_obj_dtor;
-    return (anim_obj);
 }
 
 void anim_obj_dtor(void *anim_obj)

@@ -23,8 +23,4 @@
 #include "msf/types.h"
 #include "my.h"
 
-sfVector2f vectorf_new(float x, float y);
-sfVector2i vectori_new(int x, int y);
-sfVector2u vectoru_new(uint x, uint y);
-
 #endif /* !MSF_H_ */

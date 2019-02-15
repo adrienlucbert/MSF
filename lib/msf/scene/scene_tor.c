@@ -16,17 +16,16 @@ void *scene_new(void)
     return ((void *)st_scene);
 }
 
-void *scene_ctor(void *scene)
+void scene_ctor(void *scene)
 {
     scene_t *st_scene = (scene_t *)scene;
 
-    FAIL_IF(!st_scene, NULL);
+    FAIL_IF_VOID(!st_scene);
     st_scene->objs = NULL;
     st_scene->evts = NULL;
-    st_scene->cam_pos = vectorf_new(0, 0);
-    st_scene->cam_speed = vectorf_new(0, 0);
+    st_scene->cam_pos = (sfVector2f){0, 0};
+    st_scene->cam_speed = (sfVector2f){0, 0};
     st_scene->dtor = scene_dtor;
-    return (scene);
 }
 
 void scene_dtor(void *scene)

@@ -16,17 +16,16 @@ void *obj_mouse_evt_new(void)
     return ((void *)st_mouse_evt);
 }
 
-void *obj_mouse_evt_ctor(void *mouse_evt)
+void obj_mouse_evt_ctor(void *mouse_evt)
 {
     obj_mouse_evt_t *st_mouse_evt = (obj_mouse_evt_t *)mouse_evt;
 
-    FAIL_IF(!mouse_evt, NULL);
+    FAIL_IF_VOID(!mouse_evt);
     st_mouse_evt->focus = sfFalse;
     st_mouse_evt->hover = sfFalse;
     st_mouse_evt->active = sfFalse;
     st_mouse_evt->x = 0;
     st_mouse_evt->y = 0;
-    return (mouse_evt);
 }
 
 void obj_mouse_evt_destroy(void *mouse_evt)

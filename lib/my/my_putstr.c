@@ -11,7 +11,7 @@ void my_putstr(char const *str)
 {
     int index = 0;
 
-    if (str == NULL)
+    if (!str)
         return;
     while (str[index] != '\0') {
         my_putchar(str[index]);

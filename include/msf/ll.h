@@ -32,7 +32,7 @@ struct msf_node_s {
 */
 // NODE TOR
 void *node_new(char *label, void *next);
-void *node_ctor(void *node, char *label, void *next);
+void node_ctor(void *node, char *label, void *next);
 void node_dtor(void *node);
 void node_destroy(void *node);
 
@@ -40,7 +40,7 @@ void node_destroy(void *node);
 void node_pop(void *node);
 
 // LIST MET
-void *list_append(void *begin, void *node);
+void *list_append(void **begin, void *node);
 void list_destroy(void *begin);
 void list_apply(void *begin, void (*func)(void *));
 void *list_fetch(void *begin, char *label);

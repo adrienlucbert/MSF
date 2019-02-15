@@ -28,13 +28,13 @@ enum msf_evt_scope_e {
 **      evt         function to be triggered by the event
 */
 struct msf_game_evt_s {
-    evt_scope scope;
-    void (*evt)(hub_t *hub, sfEvent evt);
-
     // msf_node_s inherited properties
     char *label;
     void *next;
     void (*dtor)(void *);
+
+    evt_scope scope;
+    void (*evt)(hub_t *hub, sfEvent evt);
 };
 
 /*
@@ -42,7 +42,7 @@ struct msf_game_evt_s {
 */
 // EVT TOR
 void *evt_new(void (*fn)(hub_t *, sfEvent), evt_scope scope);
-void *evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope);
+void evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope);
 void evt_destroy(void *evt);
 
 #endif /* !MSF_EVT_H_ */

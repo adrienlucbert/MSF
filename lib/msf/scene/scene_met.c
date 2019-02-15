@@ -11,14 +11,16 @@ void scene_add_evt(void *scene, void *evt, char *label)
 {
     scene_t *st_scene = (scene_t *)scene;
 
+    FAIL_IF_VOID(!st_scene || !evt);
     node_ctor(evt, label, NULL);
-    list_append(st_scene->evts, evt);
+    list_append(&st_scene->evts, evt);
 }
 
 void scene_add_obj(void *scene, void *obj, char *label)
 {
     scene_t *st_scene = (scene_t *)scene;
 
+    FAIL_IF_VOID(!st_scene || !obj);
     node_ctor(obj, label, NULL);
-    list_append(st_scene->objs, obj);
+    list_append(&st_scene->objs, obj);
 }

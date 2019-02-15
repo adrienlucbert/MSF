@@ -33,7 +33,7 @@ struct msf_hub_s {
 */
 // HUB CTOR
 void *hub_new(char *title, sfVector2i size, sfUint32 style);
-void *hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style);
+void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style);
 void hub_dtor(void *hub);
 void hub_destroy(void *hub);
 

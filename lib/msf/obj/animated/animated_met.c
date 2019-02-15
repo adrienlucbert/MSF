@@ -6,17 +6,20 @@
 */
 
 #include "msf/msf.h"
+#include <stdio.h>
 
-void obj_add_anim(void *obj, void *anim, char *label)
+void anim_obj_add_anim(void *obj, void *anim, char *label)
 {
     anim_obj_t *st_obj = (anim_obj_t *)obj;
 
     node_ctor(anim, label, NULL);
-    list_append(st_obj->anims, anim);
+    list_append(&st_obj->anims, anim);
 }
 
-void obj_animated_render(hub_t *hub, void *obj)
+void anim_obj_render(hub_t *hub, void *anim_obj)
 {
-    hub = hub;
-    obj = obj;
+    anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
+    anim_t *st_anim = (anim_t *)st_anim_obj->anims;
+
+    sfRenderWindow_drawSprite(hub->window, st_anim->sprite, NULL);
 }
