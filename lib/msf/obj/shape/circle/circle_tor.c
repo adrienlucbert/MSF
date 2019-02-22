@@ -22,6 +22,7 @@ void circle_ctor(void *circle, float radius, size_t point_count, sfColor color)
 
     FAIL_IF_VOID(!st_circle);
     obj_ctor(st_circle, shape);
+    st_circle->shape = sfCircleShape_create();
     circle_set_outline_color(st_circle, color);
     circle_set_fill_color(st_circle, color);
     circle_set_radius(st_circle, radius);

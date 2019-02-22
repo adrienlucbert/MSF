@@ -13,7 +13,7 @@ void circle_set_outline_color(void *circle, sfColor outline)
 
     FAIL_IF_VOID(!st_circle);
     st_circle->outline_color = outline;
-    sfCircleShape_setOutlineColor((sfCircleShape *)st_circle->shape, outline);
+    sfCircleShape_setOutlineColor(st_circle->shape, outline);
 }
 
 void circle_set_fill_color(void *circle, sfColor fill)
