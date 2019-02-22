@@ -9,11 +9,12 @@
 
 void window_render(hub_t *hub)
 {
-    sfInt64 delay = sfClock_getElapsedTime(hub->timer).microseconds;
+    sfInt64 delay = 0;
 
-    FAIL_IF_VOID(!hub->scenes);
+    FAIL_IF_VOID(!hub || !hub->scenes || !hub->timer);
+    delay = sfClock_getElapsedTime(hub->timer).microseconds;
     if (delay / 1000 >= 1000 / hub->framerate) {
-        // scene_refresh(hub);
+        hub_render(hub);
         sfClock_restart(hub->timer);
     }
 }

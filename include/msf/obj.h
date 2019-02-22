@@ -107,6 +107,10 @@ struct msf_text_obj_s {
 /*
 **  Animated Game Object
 **      anims       list of animations
+**      sprite      object sprite for texture rendering
+**      scale       object scale
+**      origin      object transformation origin
+**      timer       animation clock
 */
 struct msf_animated_obj_s {
     // msf_node_s inherited properties
@@ -124,16 +128,17 @@ struct msf_animated_obj_s {
     void (*render)(hub_t *, void *);
     obj_mouse_evt_t *mouse_evt;
 
+    sfVector2f scale;
+    sfVector2f origin;
+    float rotation;
+    sfSprite *sprite;
+    sfClock *timer;
     void *anims;
 };
 
 /*
 **  Animation
-**      sprite          object sprite for texture rendering
-**      scale           object scale
-**      origin          object transformation origin
 **      frame_duration  frame duration (in ms)
-**      timer           animation clock
 **      frames          list of animation's frames
 */
 struct msf_anim_s {
@@ -142,12 +147,8 @@ struct msf_anim_s {
     void *next;
     void (*dtor)(void *);
 
-    sfSprite *sprite;
-    sfVector2f scale;
     sfVector2f origin;
-    float rotation;
     uint frame_duration;
-    sfClock *timer;
     void *frames;
 };
 
@@ -234,6 +235,7 @@ void anim_obj_destroy(void *anim_obj);
 // ANIMATED MET
 void anim_obj_add_anim(void *obj, void *anim, char *label);
 void anim_obj_render(hub_t *hub, void *anim_obj);
+
 
 // ANIM TOR
 void *anim_new(char *filepath, int nb_frames, uint frame_duration);

@@ -40,6 +40,11 @@ void hub_destroy(void *hub);
 // HUB MET
 void hub_add_global_evt(void *hub, void *global_evt, char *label);
 void hub_add_scene(void *hub, void *scene, char *label);
+void hub_render(hub_t *hub);
+void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data);
+
+// GLOBAL EVTS
+void window_close_evt(hub_t *hub, sfEvent evt);
 
 // HUB SETTERS
 void hub_set_framerate(void *hub, uint framerate);

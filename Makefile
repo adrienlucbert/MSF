@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC			=	src/main.c
+SRC			=	src/main.c		\
+				src/menu.c
 
 OBJ			=	$(SRC:.c=.o)
 

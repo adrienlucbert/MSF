@@ -46,6 +46,7 @@ void scene_destroy(void *scene);
 // SCENE MET
 void scene_add_evt(void *scene, void *evt, char *label);
 void scene_add_obj(void *scene, void *obj, char *label);
+void scene_render(hub_t *hub, void *scene);
 
 // SCENE SETTERS
 void scene_set_cam_speed(void *scene, float sx, float sy);

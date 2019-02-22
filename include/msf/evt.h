@@ -45,4 +45,8 @@ void *evt_new(void (*fn)(hub_t *, sfEvent), evt_scope scope);
 void evt_ctor(void *evt, void (*fn)(hub_t *, sfEvent), evt_scope scope);
 void evt_destroy(void *evt);
 
+// EVT MET
+void evt_trigger_scope(void *evts, evt_scope scope, hub_t *hub, sfEvent data);
+void evt_trigger(void *evt, hub_t *hub, sfEvent data);
+
 #endif /* !MSF_EVT_H_ */

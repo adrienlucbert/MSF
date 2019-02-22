@@ -14,6 +14,7 @@ sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style)
 
     window = sfRenderWindow_create(mode, title, style, NULL);
     sfRenderWindow_setMouseCursorVisible(window, sfFalse);
+    sfRenderWindow_setFramerateLimit(window, 144);
     return (window);
 }
 
