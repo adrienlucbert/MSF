@@ -19,8 +19,8 @@
 #define FAIL_IF_VOID(cond)  if (cond) return;
 #endif /* !FAIL_IF */
 
-#define VSET(THIS, SETTER, ...) if (THIS->vtable->SETTER) \
-    THIS->vtable->SETTER(THIS, __VA_ARGS__)
+#define VFUNC(THIS, FUNC, ...) if (THIS->vtable->FUNC) \
+    THIS->vtable->FUNC(THIS, __VA_ARGS__)
 #define VGET(THIS, GETTER) if (THIS->vtable->GETTER) \
     THIS->vtable->GETTER(THIS)
 

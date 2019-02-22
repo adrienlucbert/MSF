@@ -19,7 +19,8 @@
 enum msf_obj_type_e {
     text,
     animated,
-    input
+    input,
+    shape
 };
 
 enum msf_obj_fixing_e {
@@ -221,6 +222,35 @@ struct msf_input_obj_s {
 };
 
 /*
+**  Shape Game Object
+**      value       shape value
+*/
+struct msf_shape_obj_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
+    // msf_game_obj_s inherited properties
+    obj_fixing fixing;
+    obj_type type;
+    int group;
+    sfBool state;
+    sfVector2f speed;
+    sfVector2f pos;
+    obj_vtable_t *vtable;
+    obj_mouse_evt_t *mouse_evt;
+
+    void *shape;
+    sfVector2f size;
+    float radius;
+    float outline_thickness;
+    size_t point_count;
+    sfColor outline_color;
+    sfColor fill_color;
+};
+
+/*
 **  PROTOTYPES
 */
 // OBJ TOR
@@ -346,5 +376,48 @@ void input_obj_set_value(void *input_obj, void *value);
 void *input_obj_vtable_new(void);
 void input_obj_vtable_ctor(void *obj_vtable);
 void input_vtable_destroy(void *obj_vtable);
+
+// CIRCLE TOR
+void *circle_new(float radius, size_t point_count, sfColor color);
+void circle_ctor(void *circle, float radius, size_t point_count, sfColor color);
+void circle_dtor(void *obj);
+void circle_destroy(void *obj);
+
+// CIRCLE MET
+void circle_render(void *circle, hub_t *hub);
+
+// CIRCLE SET
+void circle_set_point_count(void *circle, int point_count);
+void circle_set_fill_color(void *circle, sfColor fill);
+void circle_set_outline_thickness(void *circle, float thickness);
+void circle_set_radius(void *circle, float radius);
+void circle_set_outline_color(void *circle, sfColor outline);
+void circle_set_scale(void *rect, sfVector2f scale);
+
+// CIRCLE VTABLE
+void *circle_vtable_new(void);
+void circle_vtable_ctor(void *obj_vtable);
+void circle_vtable_destroy(void *obj_vtable);
+
+// RECT TOR
+void *rect_new(sfVector2f size, sfColor color);
+void rect_ctor(void *rect, sfVector2f size, sfColor color);
+void rect_dtor(void *rect);
+void rect_destroy(void *shape_obj);
+
+// RECT MET
+void rect_render(void *shape_obj, hub_t *hub);
+
+// RECT SET
+void rect_set_scale(void *rect, sfVector2f scale);
+void rect_set_size(void *rect, sfVector2f size);
+void rect_set_outline_thickness(void *rect, float thickness);
+void rect_set_fill_color(void *rect, sfColor fill);
+void rect_set_outline_color(void *rect, sfColor outline);
+
+// RECT VTABLE
+void *rect_vtable_new(void);
+void rect_vtable_ctor(void *obj_vtable);
+void rect_vtable_destroy(void *obj_vtable);
 
 #endif /* !MSF_OBJ_H_ */
