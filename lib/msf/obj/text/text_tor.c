@@ -23,7 +23,7 @@ void text_obj_ctor(void *text_obj, char *str)
     FAIL_IF_VOID(!st_text_obj);
     obj_ctor(st_text_obj, text);
     st_text_obj->text = sfText_create();
-    text_obj_set_font(st_text_obj, NULL);
+    text_obj_set_font(st_text_obj, "assets/font/open_sans.ttf");
     text_obj_set_color(st_text_obj, sfBlack);
     text_obj_set_char_size(st_text_obj, 20);
     text_obj_set_string(st_text_obj, str);

@@ -28,6 +28,13 @@ SRC			=	ll/list_met.c						\
 				obj/input/input_tor.c				\
 				obj/input/input_met.c				\
 				obj/input/input_set.c				\
+				obj/shape/circle/circle_met.c		\
+				obj/shape/circle/circle_set.c		\
+				obj/shape/circle/circle_set_2.c		\
+				obj/shape/circle/circle_tor.c		\
+				obj/shape/rect/rect_met.c			\
+				obj/shape/rect/rect_set.c			\
+				obj/shape/rect/rect_tor.c			\
 				obj/animated/animated_tor.c			\
 				obj/animated/animated_met.c			\
 				obj/animated/anim/anim_tor.c		\
@@ -48,7 +55,7 @@ NETWORK		=	-l csfml-network
 
 LDLIBS		=	-L../ -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO) -lm
 INCLUDE		=	-I../../include
-CFLAGS		=	-Werror -Wextra -Wall -g $(INCLUDE) $(LDLIBS)
+CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 
 all:	$(NAME)
 

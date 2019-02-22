@@ -19,7 +19,7 @@ NETWORK		=	-l csfml-network
 
 LDLIBS		=	-Llib -lmsf -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO)
 INCLUDE		=	-Iinclude
-CFLAGS		=	-Werror -Wextra -Wall -g $(INCLUDE) $(LDLIBS)
+CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 
 all:	$(NAME)
 

@@ -19,7 +19,8 @@
 enum msf_obj_type_e {
     text,
     animated,
-    input
+    input,
+    shape
 };
 
 enum msf_obj_fixing_e {
@@ -188,6 +189,35 @@ struct msf_input_obj_s {
 };
 
 /*
+**  Shape Game Object
+**      value       shape value
+*/
+struct msf_shape_obj_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
+    // msf_game_obj_s inherited properties
+    obj_fixing fixing;
+    obj_type type;
+    int group;
+    sfBool state;
+    sfVector2f speed;
+    sfVector2f pos;
+    void (*render)(hub_t *, void *);
+    obj_mouse_evt_t *mouse_evt;
+
+    void *shape;
+    sfVector2f size;
+    float radius;
+    float outline_thickness;
+    size_t point_count;
+    sfColor outline_color;
+    sfColor fill_color;
+};
+
+/*
 **  PROTOTYPES
 */
 // OBJ TOR
@@ -264,5 +294,38 @@ void input_obj_render(hub_t *hub, void *input_obj);
 
 // INPUT SET
 void input_obj_set_value(void *input_obj, void *value);
+
+// CIRCLE TOR
+void *circle_new(float radius, size_t point_count, sfColor color);
+void circle_ctor(void *circle, float radius, size_t point_count, sfColor color);
+void circle_dtor(void *obj);
+void circle_destroy(void *obj);
+
+// CIRCLE MET
+void circle_render(hub_t *hub, void *circle);
+
+// CIRCLE SET
+void circle_set_point_count(void *circle, int point_count);
+void circle_set_fill_color(void *circle, sfColor fill);
+void circle_set_outline_thickness(void *circle, float thickness);
+void circle_set_radius(void *circle, float radius);
+void circle_set_outline_color(void *circle, sfColor outline);
+void circle_set_scale(void *rect, float scale_x, float scale_y);
+
+// RECT TOR
+void *rect_new(sfVector2f size, sfColor color);
+void rect_ctor(void *rect, sfVector2f size, sfColor color);
+void rect_dtor(void *rect);
+void rect_destroy(void *shape_obj);
+
+// RECT MET
+void rect_render(hub_t *hub, void *shape_obj);
+
+// RECT SET
+void rect_set_scale(void *rect, float scale_x, float scale_y);
+void rect_set_size(void *rect, float x, float y);
+void rect_set_outline_thickness(void *rect, float thickness);
+void rect_set_fill_color(void *rect, sfColor fill);
+void rect_set_outline_color(void *rect, sfColor outline);
 
 #endif /* !MSF_OBJ_H_ */
