@@ -24,3 +24,20 @@ void scene_add_obj(void *scene, void *obj, char *label)
     node_ctor(obj, label, NULL);
     list_append(&st_scene->objs, obj);
 }
+
+void scene_render(hub_t *hub, void *scene)
+{
+    scene_t *st_scene = (scene_t *)scene;
+    node_t *curr = NULL;
+    node_t *next = NULL;
+
+    FAIL_IF_VOID(!st_scene || !st_scene->objs);
+    curr = (node_t *)st_scene->objs;
+    next = curr->next;
+    while (next != st_scene->objs) {
+        obj_render((void *)curr, hub);
+        curr = next;
+        next = (node_t *)next->next;
+    };
+    obj_render((void *)curr, hub);
+}

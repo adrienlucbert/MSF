@@ -15,6 +15,7 @@ SRC			=	ll/list_met.c						\
 				hub/window_met.c					\
 				hub/global_evts.c					\
 				evt/evt_tor.c						\
+				evt/evt_met.c						\
 				scene/scene_tor.c					\
 				scene/scene_met.c					\
 				scene/scene_set.c					\

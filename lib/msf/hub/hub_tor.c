@@ -13,6 +13,7 @@ void *hub_new(char *title, sfVector2i size, sfUint32 style)
 
     FAIL_IF(!st_hub, NULL);
     hub_ctor(st_hub, title, size, style);
+    hub_add_global_evt(st_hub, evt_new(window_close_evt, inputs), NULL);
     return ((void *)st_hub);
 }
 

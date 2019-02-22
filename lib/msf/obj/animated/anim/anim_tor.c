@@ -21,12 +21,7 @@ void anim_ctor(void *anim, char *filepath, int nb_frames, uint frame_duration)
     anim_t *st_anim = (anim_t *)anim;
 
     FAIL_IF_VOID(!st_anim);
-    st_anim->sprite = sfSprite_create();
-    st_anim->scale = (sfVector2f){1, 1};
-    st_anim->origin = (sfVector2f){0, 0};
-    st_anim->rotation = 0;
     st_anim->frame_duration = frame_duration;
-    st_anim->timer = sfClock_create();
     anim_set_frames(anim, filepath, nb_frames);
     st_anim->dtor = anim_dtor;
 }
@@ -35,8 +30,6 @@ void anim_dtor(void *anim)
 {
     anim_t *st_anim = (anim_t *)anim;
 
-    sfSprite_destroy(st_anim->sprite);
-    sfClock_destroy(st_anim->timer);
     list_destroy(st_anim->frames);
 }
 

@@ -21,5 +21,4 @@ void anim_set_frames(void *anim, char *filepath, int nb_frames)
         area.left += size.x / nb_frames;
         ++frame_id;
     }
-    sfSprite_setTexture(((anim_t *)anim)->sprite, texture, sfTrue);
 }

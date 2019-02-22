@@ -24,3 +24,21 @@ void hub_add_scene(void *hub, void *scene, char *label)
     node_ctor(scene, label, NULL);
     list_append(&st_hub->scenes, scene);
 }
+
+void hub_render(hub_t *hub)
+{
+    FAIL_IF_VOID(!hub || !hub->scenes);
+
+    scene_render(hub, hub->scenes);
+}
+
+void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data)
+{
+    scene_t *st_scene = NULL;
+
+    FAIL_IF_VOID(!hub || !hub->global_evts);
+    evt_trigger_scope(hub->global_evts, scope, hub, data);
+    st_scene = (scene_t *)hub->scenes;
+    FAIL_IF_VOID(!st_scene || !st_scene->evts);
+    evt_trigger_scope(st_scene->evts, scope, hub, data);
+}
