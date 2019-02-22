@@ -27,7 +27,6 @@ void text_obj_ctor(void *text_obj, char *str)
     text_obj_set_color(st_text_obj, sfBlack);
     text_obj_set_char_size(st_text_obj, 20);
     text_obj_set_string(st_text_obj, str);
-    st_text_obj->render = text_obj_render;
     st_text_obj->dtor = text_obj_dtor;
 }
 

@@ -37,7 +37,7 @@ void anim_obj_animate(void *anim_obj)
     }
 }
 
-void anim_obj_render(hub_t *hub, void *anim_obj)
+void anim_obj_render(void *anim_obj, hub_t *hub)
 {
     anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
     anim_t *st_anim = NULL;

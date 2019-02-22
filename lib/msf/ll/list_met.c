@@ -6,6 +6,7 @@
 */
 
 #include "msf/msf.h"
+#include <stdio.h>
 
 void *list_append(void **begin, void *node)
 {

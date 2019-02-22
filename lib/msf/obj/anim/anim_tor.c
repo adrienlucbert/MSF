@@ -23,13 +23,10 @@ void anim_obj_ctor(void *anim_obj)
     FAIL_IF_VOID(!st_anim_obj);
     obj_ctor(st_anim_obj, animated);
     st_anim_obj->anims = NULL;
-    st_anim_obj->render = anim_obj_render;
+    st_anim_obj->vtable = anim_obj_vtable_new();
     st_anim_obj->dtor = anim_obj_dtor;
     st_anim_obj->sprite = sfSprite_create();
     st_anim_obj->timer = sfClock_create();
-    st_anim_obj->scale = (sfVector2f){1, 1};
-    st_anim_obj->origin = (sfVector2f){0, 0};
-    st_anim_obj->rotation = 0;
 }
 
 void anim_obj_dtor(void *anim_obj)

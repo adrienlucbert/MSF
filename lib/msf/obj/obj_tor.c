@@ -27,7 +27,7 @@ void obj_ctor(void *obj, obj_type type)
     st_obj->state = sfTrue;
     st_obj->speed = (sfVector2f){0, 0};
     st_obj->pos = (sfVector2f){0, 0};
-    st_obj->render = NULL;
+    st_obj->vtable = NULL;
     st_obj->mouse_evt = obj_mouse_evt_new();
     st_obj->dtor = obj_dtor;
 }
@@ -38,6 +38,8 @@ void obj_dtor(void *obj)
 
     st_obj->state = sfFalse;
     obj_mouse_evt_destroy(st_obj->mouse_evt);
+    if (st_obj->vtable)
+        anim_vtable_destroy(st_obj->vtable);
 }
 
 void obj_destroy(void *obj)

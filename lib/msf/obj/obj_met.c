@@ -11,5 +11,5 @@ void obj_render(void *obj, void *hub)
 {
     obj_t *st_obj = (obj_t *)obj;
 
-    st_obj->render(hub, obj);
+    VFUNC(st_obj, render, hub);
 }

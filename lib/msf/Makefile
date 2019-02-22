@@ -5,37 +5,52 @@
 ## Makefile
 ##
 
-SRC			=	ll/list_met.c						\
-				ll/node_tor.c						\
-				ll/node_met.c						\
-				hub/hub_tor.c						\
-				hub/hub_met.c						\
-				hub/hub_set.c						\
-				hub/window_tor.c					\
-				hub/window_met.c					\
-				hub/global_evts.c					\
-				evt/evt_tor.c						\
-				evt/evt_met.c						\
-				scene/scene_tor.c					\
-				scene/scene_met.c					\
-				scene/scene_set.c					\
-				obj/obj_tor.c						\
-				obj/obj_met.c						\
-				obj/obj_set.c						\
-				obj/mouse_evt.c						\
-				obj/text/text_tor.c					\
-				obj/text/text_met.c					\
-				obj/text/text_set.c					\
-				obj/input/input_tor.c				\
-				obj/input/input_met.c				\
-				obj/input/input_set.c				\
-				obj/animated/animated_tor.c			\
-				obj/animated/animated_met.c			\
-				obj/animated/anim/anim_tor.c		\
-				obj/animated/anim/anim_met.c		\
-				obj/animated/anim/anim_set.c		\
-				obj/animated/anim/frame/frame_tor.c	\
-				obj/animated/anim/frame/frame_met.c	\
+SRC			=	ll/list_met.c							\
+				ll/node_tor.c							\
+				ll/node_met.c							\
+				hub/hub_tor.c							\
+				hub/hub_met.c							\
+				hub/hub_set.c							\
+				hub/window_tor.c						\
+				hub/window_met.c						\
+				hub/global_evts.c						\
+				evt/evt_tor.c							\
+				evt/evt_met.c							\
+				scene/scene_tor.c						\
+				scene/scene_met.c						\
+				scene/scene_set.c						\
+				obj/obj_tor.c							\
+				obj/obj_met.c							\
+				obj/obj_set.c							\
+				obj/mouse_evt.c							\
+				obj/text/text_tor.c						\
+				obj/text/text_met.c						\
+				obj/text/text_set.c						\
+				obj/text/text_get_s.c					\
+				obj/text/text_get_t.c					\
+				obj/text/text_set_s.c					\
+				obj/text/text_set_t.c					\
+				obj/text/text_vtable.c					\
+				obj/input/input_tor.c					\
+				obj/input/input_met.c					\
+				obj/input/input_set.c					\
+				obj/input/input_set_t.c					\
+				obj/input/input_set_s.c					\
+				obj/input/input_get_t.c					\
+				obj/input/input_get_s.c					\
+				obj/input/input_vtable.c				\
+				obj/anim/anim_tor.c						\
+				obj/anim/anim_met.c						\
+				obj/anim/anim_set_t.c					\
+				obj/anim/anim_set_s.c					\
+				obj/anim/anim_get_t.c					\
+				obj/anim/anim_get_s.c					\
+				obj/anim/anim_vtable.c					\
+				obj/anim/animation/animation_tor.c		\
+				obj/anim/animation/animation_met.c		\
+				obj/anim/animation/animation_set.c		\
+				obj/anim/animation/frame/frame_tor.c	\
+				obj/anim/animation/frame/frame_met.c	\
 
 OBJ			=	$(SRC:.c=.o)
 

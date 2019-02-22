@@ -6,6 +6,7 @@
 */
 
 #include "msf/msf.h"
+#include <stdio.h>
 
 void anim_set_frames(void *anim, char *filepath, int nb_frames)
 {

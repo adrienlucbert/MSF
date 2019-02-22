@@ -16,6 +16,7 @@ typedef struct msf_text_obj_s       text_obj_t;
 typedef struct msf_animated_obj_s   anim_obj_t;
 typedef struct msf_input_obj_s      input_obj_t;
 typedef struct msf_obj_mouse_evt_s  obj_mouse_evt_t;
+typedef struct msf_obj_vtable_s     obj_vtable_t;
 typedef struct msf_anim_s           anim_t;
 typedef struct msf_node_s           node_t;
 typedef struct msf_frame_s          frame_t;

@@ -7,7 +7,7 @@
 
 #include "msf/msf.h"
 
-void input_obj_render(hub_t *hub, void *input_obj)
+void input_obj_render(void *input_obj, hub_t *hub)
 {
     hub = hub;
     input_obj = input_obj;

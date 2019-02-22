@@ -23,7 +23,6 @@ void input_obj_ctor(void *input_obj)
     FAIL_IF_VOID(!st_input_obj);
     obj_ctor(st_input_obj, text);
     st_input_obj->value = NULL;
-    st_input_obj->render = input_obj_render;
     st_input_obj->dtor = input_obj_dtor;
 }
 

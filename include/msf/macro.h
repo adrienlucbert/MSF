@@ -19,7 +19,9 @@
 #define FAIL_IF_VOID(cond)  if (cond) return;
 #endif /* !FAIL_IF */
 
-#define INVOKE(STYPE, THIS, FUNC, ...)  \
-(*((const struct STYPE) (THIS)))->FUNC(THIS, __VA_ARGS__)
+#define VSET(THIS, SETTER, ...) if (THIS->vtable->SETTER) \
+    THIS->vtable->SETTER(THIS, __VA_ARGS__)
+#define VGET(THIS, GETTER) if (THIS->vtable->GETTER) \
+    THIS->vtable->GETTER(THIS)
 
 #endif /* !MSF_MACRO_H_ */
