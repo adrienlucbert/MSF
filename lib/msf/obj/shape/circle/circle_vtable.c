@@ -22,23 +22,23 @@ void circle_vtable_ctor(void *obj_vtable)
 
     st_obj_vtable->render = circle_render;
     st_obj_vtable->set_fill_color = circle_set_fill_color;
-    st_obj_vtable->set_origin = NULL;
+    st_obj_vtable->set_origin = circle_set_origin;
     st_obj_vtable->set_outline_color = circle_set_outline_color;
     st_obj_vtable->set_outline_thickness = circle_set_outline_thickness;
-    st_obj_vtable->set_position = NULL;
-    st_obj_vtable->set_rotation = NULL;
+    st_obj_vtable->set_position = circle_set_position;
+    st_obj_vtable->set_rotation = circle_set_rotation;
     st_obj_vtable->set_scale = circle_set_scale;
-    st_obj_vtable->set_size = NULL;
-    st_obj_vtable->set_texture = NULL;
-    st_obj_vtable->get_fill_color = NULL;
-    st_obj_vtable->get_origin = NULL;
-    st_obj_vtable->get_outline_color = NULL;
-    st_obj_vtable->get_outline_thickness = NULL;
-    st_obj_vtable->get_position = NULL;
-    st_obj_vtable->get_rotation = NULL;
-    st_obj_vtable->get_scale = NULL;
-    st_obj_vtable->get_size = NULL;
-    st_obj_vtable->get_texture = NULL;
+    st_obj_vtable->set_size = circle_set_size;
+    st_obj_vtable->set_texture = circle_set_texture;
+    st_obj_vtable->get_fill_color = circle_get_fill_color;
+    st_obj_vtable->get_origin = circle_get_origin;
+    st_obj_vtable->get_outline_color = circle_get_outline_color;
+    st_obj_vtable->get_outline_thickness = circle_get_outline_thickness;
+    st_obj_vtable->get_position = circle_get_position;
+    st_obj_vtable->get_rotation = circle_get_rotation;
+    st_obj_vtable->get_scale = circle_get_scale;
+    st_obj_vtable->get_size = circle_get_size;
+    st_obj_vtable->get_texture = circle_get_texture;
 }
 
 void circle_vtable_destroy(void *obj_vtable)

@@ -7,7 +7,7 @@
 
 #include "msf/msf.h"
 
-void *rect_new(sfVector2f size, sfColor color)
+void *rect_new(sfVector2u size, sfColor color)
 {
     shape_obj_t *st_rect = malloc(sizeof(shape_obj_t));
 
@@ -16,7 +16,7 @@ void *rect_new(sfVector2f size, sfColor color)
     return ((void *)st_rect);
 }
 
-void rect_ctor(void *rect, sfVector2f size, sfColor color)
+void rect_ctor(void *rect, sfVector2u size, sfColor color)
 {
     shape_obj_t *st_rect = (shape_obj_t *)rect;
 
@@ -24,9 +24,9 @@ void rect_ctor(void *rect, sfVector2f size, sfColor color)
     obj_ctor(st_rect, shape);
     st_rect->shape = sfRectangleShape_create();
     st_rect->vtable = rect_vtable_new();
-    rect_set_fill_color(st_rect, color);
-    rect_set_outline_color(st_rect, color);
-    rect_set_size(st_rect, size);
+    VFUNC(st_rect, set_outline_color, color);
+    VFUNC(st_rect, set_fill_color, color);
+    VFUNC(st_rect, set_size, size);
     st_rect->dtor = rect_dtor;
 }
 

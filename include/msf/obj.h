@@ -242,12 +242,6 @@ struct msf_shape_obj_s {
     obj_mouse_evt_t *mouse_evt;
 
     void *shape;
-    sfVector2f size;
-    float radius;
-    float outline_thickness;
-    size_t point_count;
-    sfColor outline_color;
-    sfColor fill_color;
 };
 
 /*
@@ -387,12 +381,30 @@ void circle_destroy(void *obj);
 void circle_render(void *circle, hub_t *hub);
 
 // CIRCLE SET
-void circle_set_point_count(void *circle, int point_count);
+void circle_set_origin(void *circle, sfVector2f origin);
+void circle_set_position(void *circle, sfVector2f position);
+void circle_set_rotation(void *circle, float rotation);
+void circle_set_scale(void *circle, sfVector2f scale);
+void circle_set_size(void *circle, sfVector2u size);
+void circle_set_outline_color(void *circle, sfColor outline);
 void circle_set_fill_color(void *circle, sfColor fill);
 void circle_set_outline_thickness(void *circle, float thickness);
+void circle_set_texture(void *circle, sfTexture *texture, sfBool reset);
 void circle_set_radius(void *circle, float radius);
-void circle_set_outline_color(void *circle, sfColor outline);
-void circle_set_scale(void *rect, sfVector2f scale);
+void circle_set_point_count(void *circle, int point_count);
+
+// CIRCLE GET
+sfVector2f circle_get_origin(void *circle);
+sfVector2f circle_get_position(void *circle);
+float circle_get_rotation(void *circle);
+sfVector2f circle_get_scale(void *circle);
+sfVector2u circle_get_size(void *circle);
+sfColor circle_get_outline_color(void *circle);
+sfColor circle_get_fill_color(void *circle);
+float circle_get_outline_thickness(void *circle);
+const sfTexture *circle_get_texture(void *circle);
+float circle_get_radius(void *circle);
+size_t circle_get_point_count(void *circle);
 
 // CIRCLE VTABLE
 void *circle_vtable_new(void);
@@ -400,20 +412,35 @@ void circle_vtable_ctor(void *obj_vtable);
 void circle_vtable_destroy(void *obj_vtable);
 
 // RECT TOR
-void *rect_new(sfVector2f size, sfColor color);
-void rect_ctor(void *rect, sfVector2f size, sfColor color);
+void *rect_new(sfVector2u size, sfColor color);
+void rect_ctor(void *rect, sfVector2u size, sfColor color);
 void rect_dtor(void *rect);
 void rect_destroy(void *shape_obj);
 
 // RECT MET
 void rect_render(void *shape_obj, hub_t *hub);
 
-// RECT SET
+// CIRCLE SET
+void rect_set_origin(void *rect, sfVector2f origin);
+void rect_set_position(void *rect, sfVector2f position);
+void rect_set_rotation(void *rect, float rotation);
 void rect_set_scale(void *rect, sfVector2f scale);
-void rect_set_size(void *rect, sfVector2f size);
-void rect_set_outline_thickness(void *rect, float thickness);
-void rect_set_fill_color(void *rect, sfColor fill);
+void rect_set_size(void *rect, sfVector2u size);
 void rect_set_outline_color(void *rect, sfColor outline);
+void rect_set_fill_color(void *rect, sfColor fill);
+void rect_set_outline_thickness(void *rect, float thickness);
+void rect_set_texture(void *rect, sfTexture *texture, sfBool reset);
+
+// CIRCLE GET
+sfVector2f rect_get_origin(void *rect);
+sfVector2f rect_get_position(void *rect);
+float rect_get_rotation(void *rect);
+sfVector2f rect_get_scale(void *rect);
+sfVector2u rect_get_size(void *rect);
+sfColor rect_get_outline_color(void *rect);
+sfColor rect_get_fill_color(void *rect);
+float rect_get_outline_thickness(void *rect);
+const sfTexture *rect_get_texture(void *rect);
 
 // RECT VTABLE
 void *rect_vtable_new(void);

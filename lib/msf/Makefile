@@ -41,11 +41,18 @@ SRC			=	ll/list_met.c							\
 				obj/input/input_vtable.c				\
 				obj/shape/circle/circle_tor.c			\
 				obj/shape/circle/circle_set.c			\
-				obj/shape/circle/circle_set_2.c			\
+				obj/shape/circle/circle_set_t.c			\
+				obj/shape/circle/circle_set_s.c			\
+				obj/shape/circle/circle_get.c			\
+				obj/shape/circle/circle_get_t.c			\
+				obj/shape/circle/circle_get_s.c			\
 				obj/shape/circle/circle_met.c			\
 				obj/shape/circle/circle_vtable.c		\
 				obj/shape/rect/rect_tor.c				\
-				obj/shape/rect/rect_set.c				\
+				obj/shape/rect/rect_set_t.c				\
+				obj/shape/rect/rect_set_s.c				\
+				obj/shape/rect/rect_get_t.c				\
+				obj/shape/rect/rect_get_s.c				\
 				obj/shape/rect/rect_met.c				\
 				obj/shape/rect/rect_vtable.c			\
 				obj/anim/anim_tor.c						\

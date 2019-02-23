@@ -22,23 +22,23 @@ void rect_vtable_ctor(void *obj_vtable)
 
     st_obj_vtable->render = rect_render;
     st_obj_vtable->set_fill_color = rect_set_fill_color;
-    st_obj_vtable->set_origin = NULL;
+    st_obj_vtable->set_origin = rect_set_origin;
     st_obj_vtable->set_outline_color = rect_set_outline_color;
     st_obj_vtable->set_outline_thickness = rect_set_outline_thickness;
-    st_obj_vtable->set_position = NULL;
-    st_obj_vtable->set_rotation = NULL;
+    st_obj_vtable->set_position = rect_set_position;
+    st_obj_vtable->set_rotation = rect_set_rotation;
     st_obj_vtable->set_scale = rect_set_scale;
-    st_obj_vtable->set_size = NULL;
-    st_obj_vtable->set_texture = NULL;
-    st_obj_vtable->get_fill_color = NULL;
-    st_obj_vtable->get_origin = NULL;
-    st_obj_vtable->get_outline_color = NULL;
-    st_obj_vtable->get_outline_thickness = NULL;
-    st_obj_vtable->get_position = NULL;
-    st_obj_vtable->get_rotation = NULL;
-    st_obj_vtable->get_scale = NULL;
-    st_obj_vtable->get_size = NULL;
-    st_obj_vtable->get_texture = NULL;
+    st_obj_vtable->set_size = rect_set_size;
+    st_obj_vtable->set_texture = rect_set_texture;
+    st_obj_vtable->get_fill_color = rect_get_fill_color;
+    st_obj_vtable->get_origin = rect_get_origin;
+    st_obj_vtable->get_outline_color = rect_get_outline_color;
+    st_obj_vtable->get_outline_thickness = rect_get_outline_thickness;
+    st_obj_vtable->get_position = rect_get_position;
+    st_obj_vtable->get_rotation = rect_get_rotation;
+    st_obj_vtable->get_scale = rect_get_scale;
+    st_obj_vtable->get_size = rect_get_size;
+    st_obj_vtable->get_texture = rect_get_texture;
 }
 
 void rect_vtable_destroy(void *obj_vtable)
