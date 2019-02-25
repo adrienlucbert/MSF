@@ -24,6 +24,6 @@
 
 #define VFUNC(THIS, FUNC, ...) if (((obj_t *)THIS)->vtable->FUNC) \
     ((obj_t *)THIS)->vtable->FUNC(THIS, __VA_ARGS__)
-#define VGET(THIS, GETTER) THIS->vtable->GETTER(THIS)
+#define VGET(THIS, GETTER) ((obj_t *)THIS)->vtable->GETTER(THIS)
 
 #endif /* !MSF_MACRO_H_ */

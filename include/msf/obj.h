@@ -420,6 +420,7 @@ void input_obj_destroy(void *input_obj);
 
 // INPUT MET
 void input_obj_render(void *input_obj, hub_t *hub);
+void input_obj_recenter(void *input_obj);
 
 // INPUT SET
 void input_obj_set_value(void *input_obj, void *value);
