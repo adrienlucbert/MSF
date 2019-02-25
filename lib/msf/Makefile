@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC			=	ll/list_met.c							\
+SRC			=	utils/vector.c							\
+				ll/list_met.c							\
 				ll/node_tor.c							\
 				ll/node_met.c							\
 				hub/hub_tor.c							\
@@ -23,6 +24,11 @@ SRC			=	ll/list_met.c							\
 				obj/obj_met.c							\
 				obj/obj_set.c							\
 				obj/mouse_evt.c							\
+				obj/physics/physics_tor.c				\
+				obj/physics/physics_met.c				\
+				obj/physics/physics_set.c				\
+				obj/physics/manifold_tor.c				\
+				obj/physics/manifold_met.c				\
 				obj/text/text_tor.c						\
 				obj/text/text_met.c						\
 				obj/text/text_set.c						\

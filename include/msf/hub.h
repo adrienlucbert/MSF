@@ -13,12 +13,27 @@
 */
 
 /*
+**  Object Collision Manifold
+**      phy_a           physics of A object
+**      phy_b           physics of B object
+**      penetration     penetration of object A into object B (if they collide)
+**      normal          objects collision normal vector
+*/
+struct msf_manifold_s {
+    obj_physics_t *phy_a;
+    obj_physics_t *phy_b;
+    float penetration;
+    sfVector2f normal;
+};
+
+/*
 **  Game Hub
-**      window      game window
+**      window       game window
 **      global_evts  list of non scene-dependent events
-**      framerate   game framerate (in frames per second)
-**      timer       hub timer to handle framerate
+**      framerate    game framerate (in frames per second)
+**      timer        hub timer to handle framerate
 **      scenes       list of scenes of the game
+**      manifold     list of scenes of the game
 */
 struct msf_hub_s {
     sfRenderWindow *window;
@@ -26,6 +41,7 @@ struct msf_hub_s {
     uint framerate;
     sfClock *timer;
     void *scenes;
+    manifold_t *manifold;
 };
 
 /*

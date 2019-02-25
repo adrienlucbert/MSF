@@ -12,6 +12,7 @@ void circle_set_radius(void *circle, float radius)
     shape_obj_t *st_circle = (shape_obj_t *)circle;
 
     FAIL_IF_VOID(!st_circle);
+    st_circle->physics->radius = radius;
     sfCircleShape_setRadius(st_circle->shape, radius);
 }
 

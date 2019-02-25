@@ -21,12 +21,14 @@ void text_obj_ctor(void *text_obj, char *str)
     text_obj_t *st_text_obj = (text_obj_t *)text_obj;
 
     FAIL_IF_VOID(!st_text_obj);
-    obj_ctor(st_text_obj, text);
+    obj_ctor(st_text_obj, text, sfTrue);
     st_text_obj->text = sfText_create();
+    st_text_obj->vtable = text_obj_vtable_new();
     text_obj_set_font(st_text_obj, "assets/font/open_sans.ttf");
     text_obj_set_color(st_text_obj, sfBlack);
     text_obj_set_char_size(st_text_obj, 20);
     text_obj_set_string(st_text_obj, str);
+    st_text_obj->physics = physics_new(text_obj);
     st_text_obj->dtor = text_obj_dtor;
 }
 

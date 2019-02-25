@@ -12,15 +12,23 @@ void *anim_obj_vtable_new(void)
     obj_vtable_t *st_obj_vtable = malloc(sizeof(obj_vtable_t));
 
     FAIL_IF(!st_obj_vtable, NULL);
-    anim_obj_vtable_ctor(st_obj_vtable);
+    anim_obj_vtable_ctor_met(st_obj_vtable);
+    anim_obj_vtable_ctor_set(st_obj_vtable);
+    anim_obj_vtable_ctor_get(st_obj_vtable);
     return ((void *)st_obj_vtable);
 }
 
-void anim_obj_vtable_ctor(void *obj_vtable)
+void anim_obj_vtable_ctor_met(void *obj_vtable)
 {
     obj_vtable_t *st_obj_vtable = (obj_vtable_t *)obj_vtable;
 
     st_obj_vtable->render = anim_obj_render;
+}
+
+void anim_obj_vtable_ctor_set(void *obj_vtable)
+{
+    obj_vtable_t *st_obj_vtable = (obj_vtable_t *)obj_vtable;
+
     st_obj_vtable->set_fill_color = NULL;
     st_obj_vtable->set_origin = anim_obj_set_origin;
     st_obj_vtable->set_outline_color = NULL;
@@ -29,7 +37,14 @@ void anim_obj_vtable_ctor(void *obj_vtable)
     st_obj_vtable->set_rotation = anim_obj_set_rotation;
     st_obj_vtable->set_scale = anim_obj_set_scale;
     st_obj_vtable->set_size = anim_obj_set_size;
+    st_obj_vtable->set_radius = NULL;
     st_obj_vtable->set_texture = anim_obj_set_texture;
+}
+
+void anim_obj_vtable_ctor_get(void *obj_vtable)
+{
+    obj_vtable_t *st_obj_vtable = (obj_vtable_t *)obj_vtable;
+
     st_obj_vtable->get_fill_color = NULL;
     st_obj_vtable->get_origin = anim_obj_get_origin;
     st_obj_vtable->get_outline_color = NULL;
@@ -38,6 +53,7 @@ void anim_obj_vtable_ctor(void *obj_vtable)
     st_obj_vtable->get_rotation = anim_obj_get_rotation;
     st_obj_vtable->get_scale = anim_obj_get_scale;
     st_obj_vtable->get_size = anim_obj_get_size;
+    st_obj_vtable->get_radius = NULL;
     st_obj_vtable->get_texture = anim_obj_get_texture;
 }
 

@@ -50,6 +50,7 @@ struct msf_obj_vtable_s {
     void (*set_origin)              (void *, sfVector2f);
     void (*set_position)            (void *, sfVector2f);
     void (*set_size)                (void *, sfVector2u);
+    void (*set_radius)              (void *, float);
     void (*set_scale)               (void *, sfVector2f);
     void (*set_fill_color)          (void *, sfColor);
     void (*set_outline_color)       (void *, sfColor);
@@ -59,6 +60,7 @@ struct msf_obj_vtable_s {
     sfVector2f (*get_origin)        (void *);
     sfVector2f (*get_position)      (void *);
     sfVector2u (*get_size)          (void *);
+    float (*get_radius)             (void *);
     sfVector2f (*get_scale)         (void *);
     sfColor (*get_fill_color)       (void *);
     sfColor (*get_outline_color)    (void *);
@@ -84,6 +86,26 @@ struct msf_obj_mouse_evt_s {
 };
 
 /*
+**  Game Object Physics
+**      angle           object's movement initial angle
+**      gravity         value of the gravity applied to the object
+**      restitution     value of the bounciness of the object
+**      speed           speed of the game object
+*/
+struct msf_obj_physics_s {
+    float angle;
+    float gravity;
+    float restitution;
+    float mass;
+    float inv_mass;
+    sfVector2f speed;
+    sfVector2f pos;
+    sfVector2u size;
+    sfVector2f scale;
+    float radius;
+};
+
+/*
 **  Game Object
 **      fixing      how object moves with camera
 **      type        type of the object
@@ -103,9 +125,9 @@ struct msf_game_obj_s {
     obj_type type;
     int group;
     sfBool state;
-    sfVector2f speed;
-    sfVector2f pos;
+    sfBool is_collider;
     obj_vtable_t *vtable;
+    obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 };
 
@@ -128,9 +150,9 @@ struct msf_text_obj_s {
     obj_type type;
     int group;
     sfBool state;
-    sfVector2f speed;
-    sfVector2f pos;
+    sfBool is_collider;
     obj_vtable_t *vtable;
+    obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 
     sfText *text;
@@ -159,9 +181,9 @@ struct msf_animated_obj_s {
     obj_type type;
     int group;
     sfBool state;
-    sfVector2f speed;
-    sfVector2f pos;
+    sfBool is_collider;
     obj_vtable_t *vtable;
+    obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 
     sfSprite *sprite;
@@ -213,9 +235,9 @@ struct msf_input_obj_s {
     obj_type type;
     int group;
     sfBool state;
-    sfVector2f speed;
-    sfVector2f pos;
+    sfBool is_collider;
     obj_vtable_t *vtable;
+    obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 
     void *value;
@@ -236,9 +258,9 @@ struct msf_shape_obj_s {
     obj_type type;
     int group;
     sfBool state;
-    sfVector2f speed;
-    sfVector2f pos;
+    sfBool is_collider;
     obj_vtable_t *vtable;
+    obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 
     void *shape;
@@ -248,13 +270,18 @@ struct msf_shape_obj_s {
 **  PROTOTYPES
 */
 // OBJ TOR
-void *obj_new(obj_type type);
-void obj_ctor(void *obj, obj_type type);
+void *obj_new(obj_type type, sfBool is_collider);
+void obj_ctor(void *obj, obj_type type, sfBool is_collider);
 void obj_dtor(void *obj);
 void obj_destroy(void *obj);
 
 // OBJ MET
-void obj_render(void *obj, void *hub);
+void obj_render(void *obj, hub_t *hub);
+void obj_move(void *obj, hub_t *hub);
+void obj_bounce(void *obj, float angle, float initial_speed);
+sfBool obj_collide(hub_t *hub, void *obj_a, void *obj_b);
+sfBool obj_collide_with_all(hub_t *hub, void *obj);
+sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
@@ -266,6 +293,32 @@ void obj_set_pos(void *obj, float x, float y);
 void *obj_mouse_evt_new(void);
 void obj_mouse_evt_ctor(void *mouse_evt);
 void obj_mouse_evt_destroy(void *mouse_evt);
+
+// OBJ PHYSICS TOR
+void *physics_new(void *obj);
+void physics_ctor(void *physics, void *obj);
+void physics_destroy(void *physics);
+
+// OBJ PHYSICS MET
+void physics_reset(void *physics);
+void physics_repulse(manifold_t *m);
+
+// OBJ PHYSICS SET
+void obj_physics_set_gravity(void *obj, float gravity);
+void obj_physics_set_restitution(void *obj, float restitution);
+void obj_physics_set_angle(void *obj, float angle);
+
+// MANIFOLD TOR
+void *manifold_new(void *phy_a, obj_physics_t *phy_b);
+void manifold_ctor(void *manifold, obj_physics_t *phy_a, obj_physics_t *phy_b);
+void manifold_destroy(void *manifold);
+
+// MANIFOLD MET
+void manifold_reset(manifold_t *m, obj_physics_t *phy_a, obj_physics_t *phy_b);
+sfBool manifold_collide(manifold_t *m);
+sfBool aabb_aabb_collision(manifold_t *m);
+sfBool circle_circle_collision(manifold_t *m);
+sfBool aabb_circle_collision(manifold_t *m, sfBool aabb_first);
 
 // TEXT TOR
 void *text_obj_new(char *str);
@@ -302,7 +355,9 @@ float text_obj_get_outline_thickness(void *text_obj);
 
 // TEXT VTABLE
 void *text_obj_vtable_new(void);
-void text_obj_vtable_ctor(void *obj_vtable);
+void text_obj_vtable_ctor_met(void *obj_vtable);
+void text_obj_vtable_ctor_set(void *obj_vtable);
+void text_obj_vtable_ctor_get(void *obj_vtable);
 void text_vtable_destroy(void *obj_vtable);
 
 // ANIMATED TOR
@@ -333,7 +388,9 @@ const sfTexture *anim_obj_get_texture(void *anim_obj);
 
 // ANIMATED VTABLE
 void *anim_obj_vtable_new(void);
-void anim_obj_vtable_ctor(void *obj_vtable);
+void anim_obj_vtable_ctor_met(void *obj_vtable);
+void anim_obj_vtable_ctor_set(void *obj_vtable);
+void anim_obj_vtable_ctor_get(void *obj_vtable);
 void anim_vtable_destroy(void *obj_vtable);
 
 // ANIM TOR
@@ -368,7 +425,9 @@ void input_obj_set_value(void *input_obj, void *value);
 
 // INPUT VTABLE
 void *input_obj_vtable_new(void);
-void input_obj_vtable_ctor(void *obj_vtable);
+void input_obj_vtable_ctor_met(void *obj_vtable);
+void input_obj_vtable_ctor_set(void *obj_vtable);
+void input_obj_vtable_ctor_get(void *obj_vtable);
 void input_vtable_destroy(void *obj_vtable);
 
 // CIRCLE TOR
@@ -408,7 +467,9 @@ size_t circle_get_point_count(void *circle);
 
 // CIRCLE VTABLE
 void *circle_vtable_new(void);
-void circle_vtable_ctor(void *obj_vtable);
+void circle_vtable_ctor_met(void *obj_vtable);
+void circle_vtable_ctor_set(void *obj_vtable);
+void circle_vtable_ctor_get(void *obj_vtable);
 void circle_vtable_destroy(void *obj_vtable);
 
 // RECT TOR
@@ -444,7 +505,9 @@ const sfTexture *rect_get_texture(void *rect);
 
 // RECT VTABLE
 void *rect_vtable_new(void);
-void rect_vtable_ctor(void *obj_vtable);
+void rect_vtable_ctor_met(void *obj_vtable);
+void rect_vtable_ctor_set(void *obj_vtable);
+void rect_vtable_ctor_get(void *obj_vtable);
 void rect_vtable_destroy(void *obj_vtable);
 
 #endif /* !MSF_OBJ_H_ */

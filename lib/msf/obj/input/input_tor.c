@@ -21,8 +21,10 @@ void input_obj_ctor(void *input_obj)
     input_obj_t *st_input_obj = (input_obj_t *)input_obj;
 
     FAIL_IF_VOID(!st_input_obj);
-    obj_ctor(st_input_obj, text);
+    obj_ctor(st_input_obj, text, sfTrue);
+    st_input_obj->vtable = input_obj_vtable_new();
     st_input_obj->value = NULL;
+    st_input_obj->physics = physics_new(input_obj);
     st_input_obj->dtor = input_obj_dtor;
 }
 

@@ -21,9 +21,10 @@ void rect_ctor(void *rect, sfVector2u size, sfColor color)
     shape_obj_t *st_rect = (shape_obj_t *)rect;
 
     FAIL_IF_VOID(!st_rect);
-    obj_ctor(st_rect, shape);
+    obj_ctor(st_rect, shape, sfTrue);
     st_rect->shape = sfRectangleShape_create();
     st_rect->vtable = rect_vtable_new();
+    st_rect->physics = physics_new(rect);
     VFUNC(st_rect, set_outline_color, color);
     VFUNC(st_rect, set_fill_color, color);
     VFUNC(st_rect, set_size, size);

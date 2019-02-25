@@ -30,6 +30,7 @@ void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     st_hub->framerate = 60;
     st_hub->timer = sfClock_create();
     st_hub->scenes = NULL;
+    st_hub->manifold = manifold_new(NULL, NULL);
 }
 
 void hub_dtor(void *hub)

@@ -21,12 +21,13 @@ void anim_obj_ctor(void *anim_obj)
     anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
 
     FAIL_IF_VOID(!st_anim_obj);
-    obj_ctor(st_anim_obj, animated);
+    obj_ctor(st_anim_obj, animated, sfTrue);
     st_anim_obj->anims = NULL;
-    st_anim_obj->vtable = anim_obj_vtable_new();
-    st_anim_obj->dtor = anim_obj_dtor;
     st_anim_obj->sprite = sfSprite_create();
     st_anim_obj->timer = sfClock_create();
+    st_anim_obj->vtable = anim_obj_vtable_new();
+    st_anim_obj->physics = physics_new(anim_obj);
+    st_anim_obj->dtor = anim_obj_dtor;
 }
 
 void anim_obj_dtor(void *anim_obj)

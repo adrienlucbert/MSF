@@ -12,6 +12,5 @@ void text_obj_render(void *text_obj, hub_t *hub)
     text_obj_t *st_text_obj = (text_obj_t *)text_obj;
 
     FAIL_IF_VOID(!st_text_obj || !hub);
-    sfText_setPosition(st_text_obj->text, st_text_obj->pos);
     sfRenderWindow_drawText(hub->window, st_text_obj->text, NULL);
 }
