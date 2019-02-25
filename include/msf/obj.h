@@ -240,7 +240,8 @@ struct msf_input_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
 
-    void *value;
+    void *background;
+    void *foreground;
 };
 
 /*
@@ -321,8 +322,8 @@ sfBool circle_circle_collision(manifold_t *m);
 sfBool aabb_circle_collision(manifold_t *m, sfBool aabb_first);
 
 // TEXT TOR
-void *text_obj_new(char *str);
-void text_obj_ctor(void *text_obj, char *str);
+void *text_obj_new(char *str, sfColor color, uint char_size);
+void text_obj_ctor(void *text_obj, char *str, sfColor color, uint char_size);
 void text_obj_dtor(void *text_obj);
 void text_obj_destroy(void *text_obj);
 
@@ -412,8 +413,8 @@ void frame_dtor(void *frame);
 void frame_destroy(void *frame);
 
 // INPUT TOR
-void *input_obj_new(void);
-void input_obj_ctor(void *input_obj);
+void *input_obj_new(void *background, void *foreground, sfVector2f pos);
+void input_obj_ctor(void *input_obj, void *bck, void *frg, sfVector2f pos);
 void input_obj_dtor(void *input_obj);
 void input_obj_destroy(void *input_obj);
 

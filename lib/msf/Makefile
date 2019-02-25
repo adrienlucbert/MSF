@@ -41,7 +41,6 @@ SRC			=	utils/vector.c							\
 				obj/input/input_met.c					\
 				obj/input/input_set.c					\
 				obj/input/input_set_t.c					\
-				obj/input/input_set_s.c					\
 				obj/input/input_get_t.c					\
 				obj/input/input_get_s.c					\
 				obj/input/input_vtable.c				\
