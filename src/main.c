@@ -9,7 +9,7 @@
 
 int main(void)
 {
-    hub_t *hub = hub_new("MSF", (sfVector2i){1920, 1080}, sfDefaultStyle);
+    hub_t *hub = hub_new("MSF", (sfVector2i){1600, 900}, sfDefaultStyle);
     menu_create(hub);
     sfEvent evt;
 
