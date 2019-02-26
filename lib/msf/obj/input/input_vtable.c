@@ -55,6 +55,7 @@ void input_obj_vtable_ctor_get(void *obj_vtable)
     st_obj_vtable->get_size = NULL;
     st_obj_vtable->get_radius = NULL;
     st_obj_vtable->get_texture = NULL;
+    st_obj_vtable->get_box = input_obj_get_box;
 }
 
 void input_vtable_destroy(void *obj_vtable)

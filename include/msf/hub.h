@@ -61,6 +61,7 @@ void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);
+void mouse_evt_updater_evt(hub_t *hub, sfEvent evt);
 
 // HUB SETTERS
 void hub_set_framerate(void *hub, uint framerate);

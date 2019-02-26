@@ -55,6 +55,7 @@ void anim_obj_vtable_ctor_get(void *obj_vtable)
     st_obj_vtable->get_size = anim_obj_get_size;
     st_obj_vtable->get_radius = NULL;
     st_obj_vtable->get_texture = anim_obj_get_texture;
+    st_obj_vtable->get_box = anim_obj_get_box;
 }
 
 void anim_vtable_destroy(void *obj_vtable)

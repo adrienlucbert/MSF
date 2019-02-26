@@ -24,6 +24,8 @@ void text_obj_ctor(void *text_obj, char *str, sfColor color, uint char_size)
     obj_ctor(st_text_obj, text, sfFalse);
     st_text_obj->text = sfText_create();
     st_text_obj->vtable = text_obj_vtable_new();
+    st_text_obj->font = NULL;
+    st_text_obj->str = NULL;
     text_obj_set_font(st_text_obj, "assets/font/open_sans.ttf");
     text_obj_set_color(st_text_obj, color);
     text_obj_set_char_size(st_text_obj, char_size);

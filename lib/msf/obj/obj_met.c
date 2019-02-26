@@ -22,11 +22,9 @@ void obj_move(void *obj, hub_t *hub)
     obj_t *st_obj = (obj_t *)obj;
     obj_physics_t *st_physics = NULL;
     sfVector2f position;
-    sfVector2f speed;
 
     FAIL_IF_VOID(!st_obj || !st_obj->physics);
     st_physics = st_obj->physics;
-    speed = st_physics->speed;
     if (!obj_apply_collision_with_all(hub, obj))
         st_physics->speed.y += st_obj->physics->gravity;
     position = VGET(st_obj, get_position);
@@ -62,12 +60,12 @@ sfBool obj_collide(hub_t *hub, void *obj_a, void *obj_b)
 sfBool obj_apply_collision(hub_t *hub, void *obj_a, void *obj_b)
 {
     obj_t *st_obj_a = (obj_t *)obj_a;
-    obj_t *st_obj_b = (obj_t *)obj_b;
     sfVector2f normal = hub->manifold->normal;
     sfVector2f speed_a = st_obj_a->physics->speed;
     obj_physics_t *physics_a = st_obj_a->physics;
     sfVector2f pos_a = VGET(st_obj_a, get_position);
 
+    obj_b = obj_b;
     if (speed_a.x != 0 || speed_a.y != 0)
         pos_a.y -= hub->manifold->penetration * physics_a->inv_mass;
     speed_a.x = 0;

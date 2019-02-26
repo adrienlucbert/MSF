@@ -18,13 +18,14 @@ void input_obj_render(void *input_obj, hub_t *hub)
 
 void input_obj_recenter(void *input_obj)
 {
-    input_obj_t *st_input = input_obj;
-    sfVector2u frg_size = VGET(st_input->foreground, get_size);
-    sfVector2u bck_size = VGET(st_input->background, get_size);
-    sfVector2f bck_pos = VGET(st_input->background, get_position);
-    sfVector2f frg_pos = VGET(st_input->foreground, get_position);
+    input_obj_t *st_input_obj = (input_obj_t *)input_obj;
+    obj_t *bg = st_input_obj->background;
+    obj_t *fg = st_input_obj->foreground;
+    sfFloatRect bg_box = VGET(bg, get_box);
+    sfFloatRect fg_box = VGET(fg, get_box);
+    sfVector2f pos = {fg_box.left, fg_box.top - fg_box.height / 2};
 
-    frg_pos.x = (bck_pos.x + (bck_size.x / 2)) - (frg_size.x / 2);
-    frg_pos.y = (bck_pos.y + (bck_size.y / 2)) - (frg_size.y / 2);
-    VFUNC(st_input->foreground, set_position, frg_pos);
+    VFUNC(bg, set_origin, (sfVector2f){bg_box.width / 2, bg_box.height / 2});
+    VFUNC(fg, set_origin, (sfVector2f){fg_box.width / 2, fg_box.height / 2});
+    VFUNC(fg, set_position, pos);
 }

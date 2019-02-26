@@ -67,6 +67,7 @@ struct msf_obj_vtable_s {
     float (*get_outline_thickness)  (void *);
     float (*get_rotation)           (void *);
     const sfTexture *(*get_texture) (void *);
+    sfFloatRect (*get_box)          (void *);
 };
 
 /*
@@ -353,6 +354,7 @@ sfVector2f text_obj_get_position(void *text_obj);
 float text_obj_get_rotation(void *text_obj);
 sfVector2f text_obj_get_scale(void *text_obj);
 sfVector2u text_obj_get_size(void *text_obj);
+sfFloatRect text_obj_get_box(void *text);
 sfColor text_obj_get_fill_color(void *text_obj);
 sfColor text_obj_get_outline_color(void *text_obj);
 float text_obj_get_outline_thickness(void *text_obj);
@@ -389,6 +391,7 @@ float anim_obj_get_rotation(void *anim_obj);
 sfVector2f anim_obj_get_scale(void *anim_obj);
 sfVector2u anim_obj_get_size(void *anim_obj);
 const sfTexture *anim_obj_get_texture(void *anim_obj);
+sfFloatRect anim_obj_get_box(void *anim_obj);
 
 // ANIMATED VTABLE
 void *anim_obj_vtable_new(void);
@@ -428,6 +431,9 @@ void input_obj_recenter(void *input_obj);
 // INPUT SET
 void input_obj_set_value(void *input_obj, void *value);
 
+// INPUT GET
+sfFloatRect input_obj_get_box(void *input_obj);
+
 // INPUT VTABLE
 void *input_obj_vtable_new(void);
 void input_obj_vtable_ctor_met(void *obj_vtable);
@@ -463,6 +469,7 @@ sfVector2f circle_get_position(void *circle);
 float circle_get_rotation(void *circle);
 sfVector2f circle_get_scale(void *circle);
 sfVector2u circle_get_size(void *circle);
+sfFloatRect circle_get_box(void *circle);
 sfColor circle_get_outline_color(void *circle);
 sfColor circle_get_fill_color(void *circle);
 float circle_get_outline_thickness(void *circle);
@@ -503,6 +510,7 @@ sfVector2f rect_get_position(void *rect);
 float rect_get_rotation(void *rect);
 sfVector2f rect_get_scale(void *rect);
 sfVector2u rect_get_size(void *rect);
+sfFloatRect rect_get_box(void *rect);
 sfColor rect_get_outline_color(void *rect);
 sfColor rect_get_fill_color(void *rect);
 float rect_get_outline_thickness(void *rect);

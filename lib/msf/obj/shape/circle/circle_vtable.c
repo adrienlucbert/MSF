@@ -55,6 +55,7 @@ void circle_vtable_ctor_get(void *obj_vtable)
     st_obj_vtable->get_size = circle_get_size;
     st_obj_vtable->get_radius = circle_get_radius;
     st_obj_vtable->get_texture = circle_get_texture;
+    st_obj_vtable->get_box = circle_get_box;
 }
 
 void circle_vtable_destroy(void *obj_vtable)

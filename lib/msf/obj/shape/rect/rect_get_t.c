@@ -21,9 +21,12 @@ sfVector2f rect_get_position(void *rect)
 {
     shape_obj_t *st_rect = (shape_obj_t *)rect;
     sfVector2f position = {0, 0};
+    sfVector2f origin = {0, 0};
 
     FAIL_IF(!st_rect || !st_rect->shape, position);
+    origin = VGET(rect, get_origin);
     position = sfRectangleShape_getPosition(st_rect->shape);
+    position = (sfVector2f){position.x - origin.x, position.y - origin.y};
     return (position);
 }
 
@@ -50,12 +53,29 @@ sfVector2f rect_get_scale(void *rect)
 sfVector2u rect_get_size(void *rect)
 {
     shape_obj_t *st_rect = (shape_obj_t *)rect;
-    sfFloatRect bounds;
-    sfVector2u size = {0, 0};
+    sfVector2f fsize = {0, 0};
+    sfVector2u usize = {0, 0};
+    sfVector2f scale = {0, 0};
 
-    FAIL_IF(!st_rect || !st_rect->shape, size);
-    bounds = sfRectangleShape_getGlobalBounds(st_rect->shape);
-    size.x = bounds.width;
-    size.y = bounds.height;
-    return (size);
+    FAIL_IF(!st_rect || !st_rect->shape, usize);
+    scale = VGET(rect, get_scale);
+    fsize = sfRectangleShape_getSize(st_rect->shape);
+    usize = (sfVector2u){fsize.x * scale.x, fsize.y * scale.y};
+    return (usize);
+}
+
+sfFloatRect rect_get_box(void *rect)
+{
+    shape_obj_t *st_rect = (shape_obj_t *)rect;
+    sfVector2f pos = VGET(st_rect, get_position);
+    sfVector2u size = VGET(st_rect, get_size);
+    sfVector2f scale = VGET(st_rect, get_scale);
+    sfFloatRect box = {0, 0, 0, 0};
+
+    FAIL_IF(!st_rect, box);
+    box.left = pos.x;
+    box.top = pos.y;
+    box.width = size.x * scale.x;
+    box.height = size.y * scale.y;
+    return (box);
 }
