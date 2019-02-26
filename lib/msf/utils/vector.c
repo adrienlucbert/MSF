@@ -107,6 +107,6 @@ void physics_repulse(manifold_t *m)
     //     b->speed.x += b->inv_mass * impulse.x;
     //     b->speed.y += b->inv_mass * impulse.y;
     // }
-    a->speed.x = 0;
-    a->speed.y = 0;
+    a->speed.x = 0; 
+    a->speed.y = -a->speed.y * a->restitution;
 }

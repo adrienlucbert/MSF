@@ -281,8 +281,11 @@ void obj_render(void *obj, hub_t *hub);
 void obj_move(void *obj, hub_t *hub);
 void obj_bounce(void *obj, float angle, float initial_speed);
 sfBool obj_collide(hub_t *hub, void *obj_a, void *obj_b);
+sfBool obj_apply_collision(hub_t *hub, void *obj_a, void *obj_b);
 sfBool obj_collide_with_all(hub_t *hub, void *obj);
+sfBool obj_apply_collision_with_all(hub_t *hub, void *obj);
 sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
+sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
