@@ -72,6 +72,9 @@ void hub_set_framerate(void *hub, uint framerate);
 sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style);
 void window_destroy(sfRenderWindow *window);
 
+// WINDOW SETTERS
+void window_set_icon(sfRenderWindow *window, char *path);
+
 // WINDOW MET
 void window_render(hub_t *hub);
 
