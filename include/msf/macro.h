@@ -18,11 +18,16 @@
 #define DEFAULT_RESTITUTION 0.5
 
 #ifndef FAIL_IF
-#define FAIL_IF(cond, exit_status)     if (cond) return (exit_status)
+    #define FAIL_IF(cond, exit_status)     if (cond) return (exit_status)
 #define FAIL_IF_VOID(cond)  if (cond) return;
 #endif /* !FAIL_IF */
 
-#define VFUNC(THIS, FUNC, ...) if (((obj_t *)THIS)->vtable->FUNC) \
+#define VECT2F(x, y) (sfVector2f){x, y}
+#define VECT2U(x, y) (sfVector2u){x, y}
+#define RECT(top, left, width, height) (sfFloatRect){top, left, width, height}
+#define RGBA(R, G, B, A) (sfColor){R, G, B, A}
+
+#define VFUNC(THIS, FUNC, ...) if (THIS && ((obj_t *)THIS)->vtable->FUNC) \
     ((obj_t *)THIS)->vtable->FUNC(THIS, __VA_ARGS__)
 #define VGET(THIS, GETTER) ((obj_t *)THIS)->vtable->GETTER(THIS)
 

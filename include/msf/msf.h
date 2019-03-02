@@ -11,7 +11,8 @@
 #include <SFML/Graphics.h>
 #include <SFML/System.h>
 #include <SFML/Audio.h>
-#include <SFML/System/Vector2.h>
+#include <SFML/Window.h>
+#include <SFML/Network.h>
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,6 +23,7 @@
 #include "msf/macro.h"
 #include "msf/obj.h"
 #include "msf/types.h"
+#include "msf/sound.h"
 #include "my.h"
 
 /*

@@ -46,8 +46,6 @@ sfBool aabb_aabb_collision(manifold_t *m)
     overlap.x = (size_a.x + size_b.x) / 2 - fabs(pos_b.x - pos_a.x);
     overlap.y = (size_a.y + size_b.y) / 2 - fabs(pos_b.y - pos_a.y);
     FAIL_IF(overlap.x < 0 || overlap.y < 0, sfFalse);
-    m->normal.x = 0;
-    m->normal.y = 0;
     if (overlap.x > overlap.y) {
         m->normal.x = pos_b.x - pos_a.x < 0 ? 1 : -1;
         m->penetration = overlap.x;
@@ -68,7 +66,7 @@ sfBool circle_circle_collision(manifold_t *m)
     sfVector2f pos_b = m->phy_b->pos;
     float radius_a = m->phy_a->radius;
     float radius_b = m->phy_b->radius;
-    sfVector2f a_to_b = vector_sub(pos_b, pos_a);
+    sfVector2f a_to_b = {pos_b.x - pos_a.x, pos_b.y - pos_a.y};
 
     m->penetration = (radius_a + radius_b) - vector_magnitude(a_to_b);
     FAIL_IF(m->penetration < 0, sfFalse);
@@ -94,7 +92,7 @@ sfBool aabb_circle_collision(manifold_t *m, sfBool aabb_first)
     }
     near.x = fmax(aabb->pos.x, fmin(circ->pos.x, aabb->pos.x + aabb->size.x));
     near.y = fmax(aabb->pos.y, fmin(circ->pos.y, aabb->pos.y + aabb->size.y));
-    near_to_circ = vector_sub(circ->pos, near);
+    near_to_circ = (sfVector2f){circ->pos.x - near.x, circ->pos.y - near.y};
     m->penetration = circ->radius - vector_magnitude(near_to_circ);
     FAIL_IF(m->penetration < 0, sfFalse);
     m->normal.x = circ->pos.y - near.y;

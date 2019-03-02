@@ -42,6 +42,7 @@ struct msf_hub_s {
     sfClock *timer;
     void *scenes;
     manifold_t *manifold;
+    sound_buffer_t *sound_buffers;
 };
 
 /*
@@ -58,6 +59,7 @@ void hub_add_global_evt(void *hub, void *global_evt, char *label);
 void hub_add_scene(void *hub, void *scene, char *label);
 void hub_render(hub_t *hub);
 void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data);
+void hub_add_buffer(void *hub, void *buffer, char *label);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);

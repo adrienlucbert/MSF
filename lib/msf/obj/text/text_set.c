@@ -11,15 +11,12 @@ void text_obj_set_font(void *text_obj, char *fontpath)
 {
     text_obj_t *st_text_obj = (text_obj_t *)text_obj;
 
-    if (st_text_obj) {
-        if (st_text_obj->font != NULL)
-            sfFont_destroy(st_text_obj->font);
-        if (fontpath != NULL)
-            st_text_obj->font = sfFont_createFromFile(fontpath);
-        else
-            st_text_obj->font = NULL;
-        sfText_setFont(st_text_obj->text, st_text_obj->font);
+    FAIL_IF_VOID(!st_text_obj);
+    st_text_obj->font = NULL;
+    if (fontpath) {
+        st_text_obj->font = sfFont_createFromFile(fontpath);
     }
+    sfText_setFont(st_text_obj->text, st_text_obj->font);
 }
 
 void text_obj_set_color(void *text_obj, sfColor color)

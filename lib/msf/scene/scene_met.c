@@ -25,6 +25,14 @@ void scene_add_obj(void *scene, void *obj, char *label)
     list_append(&st_scene->objs, obj);
 }
 
+void scene_add_buffer(void *scene, void *buffer, char *label)
+{
+    scene_t *st_scene = (scene_t *)scene;
+
+    FAIL_IF_VOID(!st_scene || !buffer);
+    node_ctor(buffer, label, NULL);
+}
+
 void scene_render(hub_t *hub, void *scene)
 {
     scene_t *st_scene = (scene_t *)scene;

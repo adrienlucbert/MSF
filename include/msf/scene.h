@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** Untitled (Workspace)
+** msf
 ** File description:
 ** scene
 */
@@ -8,8 +8,7 @@
 #ifndef MSF_SCENE_H_
 #define MSF_SCENE_H_
 
-#include <SFML/System/Vector2.h>
-#include "msf/types.h"
+#include "msf.h"
 
 /*
 **  STRUCTS
@@ -32,6 +31,7 @@ struct msf_scene_s {
     void *evts;
     sfVector2f cam_speed;
     sfVector2f cam_pos;
+    sfSound *sound;
 };
 
 /*

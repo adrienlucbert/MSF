@@ -21,7 +21,7 @@ void input_obj_ctor(void *input_obj, void *bck, void *frg, sfVector2f pos)
     input_obj_t *st_input_obj = (input_obj_t *)input_obj;
 
     FAIL_IF_VOID(!st_input_obj);
-    obj_ctor(st_input_obj, text, sfFalse);
+    obj_ctor(st_input_obj, input, sfFalse);
     st_input_obj->vtable = input_obj_vtable_new();
     st_input_obj->dtor = input_obj_dtor;
     st_input_obj->foreground = frg;

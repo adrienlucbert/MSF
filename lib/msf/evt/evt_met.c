@@ -18,7 +18,7 @@ void evt_trigger_scope(void *evts, evt_scope scope, hub_t *hub, sfEvent data)
         if (curr->scope == scope)
             evt_trigger(curr, hub, data);
         curr = next;
-        next = (evt_t *)next->next;
+        next = next->next;
     };
     if (curr->scope == scope)
         evt_trigger(curr, hub, data);

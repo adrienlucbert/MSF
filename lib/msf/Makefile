@@ -13,6 +13,7 @@ SRC			=	utils/vector.c							\
 				hub/hub_met.c							\
 				hub/hub_set.c							\
 				hub/window_tor.c						\
+				hub/window_set.c						\
 				hub/window_met.c						\
 				hub/global_evts.c						\
 				evt/evt_tor.c							\
@@ -20,6 +21,9 @@ SRC			=	utils/vector.c							\
 				scene/scene_tor.c						\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
+				sound/sound_buffer_tor.c				\
+				sound/sound_scene_set.c					\
+				sound/sound_obj_set.c					\
 				obj/obj_tor.c							\
 				obj/obj_met.c							\
 				obj/obj_set.c							\
@@ -29,9 +33,12 @@ SRC			=	utils/vector.c							\
 				obj/physics/physics_set.c				\
 				obj/physics/manifold_tor.c				\
 				obj/physics/manifold_met.c				\
+				obj/physics/check_collisions.c			\
+				obj/physics/apply_collisions.c			\
 				obj/text/text_tor.c						\
 				obj/text/text_met.c						\
 				obj/text/text_set.c						\
+				obj/text/text_get.c						\
 				obj/text/text_get_s.c					\
 				obj/text/text_get_t.c					\
 				obj/text/text_set_s.c					\
@@ -56,6 +63,7 @@ SRC			=	utils/vector.c							\
 				obj/shape/rect/rect_tor.c				\
 				obj/shape/rect/rect_set_t.c				\
 				obj/shape/rect/rect_set_s.c				\
+				obj/shape/rect/rect_get.c				\
 				obj/shape/rect/rect_get_t.c				\
 				obj/shape/rect/rect_get_s.c				\
 				obj/shape/rect/rect_met.c				\
@@ -64,6 +72,7 @@ SRC			=	utils/vector.c							\
 				obj/anim/anim_met.c						\
 				obj/anim/anim_set_t.c					\
 				obj/anim/anim_set_s.c					\
+				obj/anim/anim_get.c						\
 				obj/anim/anim_get_t.c					\
 				obj/anim/anim_get_s.c					\
 				obj/anim/anim_vtable.c					\

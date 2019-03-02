@@ -42,6 +42,7 @@ void hub_dtor(void *hub)
     sfClock_destroy(st_hub->timer);
     list_destroy(st_hub->global_evts);
     list_destroy(st_hub->scenes);
+    list_destroy(st_hub->sound_buffers);
 }
 
 void hub_destroy(void *hub)

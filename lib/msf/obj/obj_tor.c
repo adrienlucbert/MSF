@@ -30,6 +30,9 @@ void obj_ctor(void *obj, obj_type type, sfBool is_collider)
     st_obj->mouse_evt = obj_mouse_evt_new();
     st_obj->physics = NULL;
     st_obj->dtor = obj_dtor;
+    st_obj->nbr = 0;
+    st_obj->on_active = NULL;
+    st_obj->sound = NULL;
 }
 
 void obj_dtor(void *obj)
@@ -40,6 +43,10 @@ void obj_dtor(void *obj)
     obj_mouse_evt_destroy(st_obj->mouse_evt);
     if (st_obj->vtable)
         anim_vtable_destroy(st_obj->vtable);
+    if (st_obj->sound) {
+        sfSound_stop(st_obj->sound);
+        sfSound_destroy(st_obj->sound);
+    }
     physics_destroy(st_obj->physics);
 }
 

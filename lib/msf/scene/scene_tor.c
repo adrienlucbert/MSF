@@ -23,6 +23,7 @@ void scene_ctor(void *scene)
     FAIL_IF_VOID(!st_scene);
     st_scene->objs = NULL;
     st_scene->evts = NULL;
+    st_scene->sound = NULL;
     st_scene->cam_pos = (sfVector2f){0, 0};
     st_scene->cam_speed = (sfVector2f){0, 0};
     st_scene->dtor = scene_dtor;
@@ -34,6 +35,10 @@ void scene_dtor(void *scene)
 
     list_destroy(st_scene->objs);
     list_destroy(st_scene->evts);
+    if (st_scene->sound) {
+        sfSound_stop(st_scene->sound);
+        sfSound_destroy(st_scene->sound);
+    }
 }
 
 void scene_destroy(void *scene)

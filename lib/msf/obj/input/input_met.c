@@ -21,10 +21,15 @@ void input_obj_recenter(void *input_obj)
     input_obj_t *st_input_obj = (input_obj_t *)input_obj;
     obj_t *bg = st_input_obj->background;
     obj_t *fg = st_input_obj->foreground;
-    sfFloatRect bg_box = VGET(bg, get_box);
-    sfFloatRect fg_box = VGET(fg, get_box);
-    sfVector2f pos = {fg_box.left, fg_box.top - fg_box.height / 2};
+    sfFloatRect fg_box = {0, 0, 0, 0};
+    sfFloatRect bg_box = {0, 0, 0, 0};
+    sfVector2f pos = {0, 0};
 
+    if (bg)
+        bg_box = VGET(bg, get_box);
+    if (fg)
+        fg_box = VGET(fg, get_box);
+    pos = (sfVector2f){fg_box.left, fg_box.top - fg_box.height / 2};
     VFUNC(bg, set_origin, (sfVector2f){bg_box.width / 2, bg_box.height / 2});
     VFUNC(fg, set_origin, (sfVector2f){fg_box.width / 2, fg_box.height / 2});
     VFUNC(fg, set_position, pos);
