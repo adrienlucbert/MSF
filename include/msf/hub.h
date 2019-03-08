@@ -43,6 +43,7 @@ struct msf_hub_s {
     void *scenes;
     manifold_t *manifold;
     sound_buffer_t *sound_buffers;
+    sfSound *sound;
 };
 
 /*

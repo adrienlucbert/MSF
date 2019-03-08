@@ -21,12 +21,9 @@ sfVector2f anim_obj_get_position(void *anim_obj)
 {
     anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
     sfVector2f position = {0, 0};
-    sfVector2f origin = {0, 0};
 
     FAIL_IF(!st_anim_obj, position);
-    origin = VGET(anim_obj, get_origin);
     position = sfSprite_getPosition(st_anim_obj->sprite);
-    position = (sfVector2f){position.x - origin.x, position.y - origin.y};
     return (position);
 }
 
@@ -65,6 +62,6 @@ sfVector2u anim_obj_get_size(void *anim_obj)
     st_frame = (frame_t *)st_anim->frames;
     size = sfTexture_getSize(st_frame->texture);
     scale = VGET(anim_obj, get_scale);
-    size = (sfVector2u){size.x * scale.x, size.y * scale.y};
+    size = VECT2U(ABS(size.x * scale.x), ABS(size.y * scale.y));
     return (size);
 }

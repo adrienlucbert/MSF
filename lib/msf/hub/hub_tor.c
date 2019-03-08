@@ -32,6 +32,8 @@ void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     st_hub->timer = sfClock_create();
     st_hub->scenes = NULL;
     st_hub->manifold = manifold_new(NULL, NULL);
+    st_hub->sound = NULL;
+    st_hub->sound_buffers = NULL;
 }
 
 void hub_dtor(void *hub)
@@ -43,6 +45,8 @@ void hub_dtor(void *hub)
     list_destroy(st_hub->global_evts);
     list_destroy(st_hub->scenes);
     list_destroy(st_hub->sound_buffers);
+    if (st_hub->sound)
+        sfSound_destroy(st_hub->sound);
 }
 
 void hub_destroy(void *hub)

@@ -13,26 +13,32 @@ void window_close_evt(hub_t *hub, sfEvent evt)
         sfRenderWindow_close(hub->window);
 }
 
-void mouse_evt_updater(void *obj, sfEvent evt)
+void mouse_evt_update_move(void *obj, sfEvent evt)
 {
     obj_t *st_obj = (obj_t *)obj;
     sfVector2f mouse = {0, 0};
     sfFloatRect box = {0, 0, 0, 0};
 
-    FAIL_IF_VOID(!st_obj);
+    mouse = VECT2F(evt.mouseMove.x, evt.mouseMove.y);
     box = VGET(obj, get_box);
-    if (evt.type == sfEvtMouseMoved) {
-        mouse = (sfVector2f){evt.mouseMove.x, evt.mouseMove.y};
-        if (sfFloatRect_contains(&box, mouse.x, mouse.y)) {
-            st_obj->mouse_evt->hover = sfTrue;
-            st_obj->mouse_evt->x = mouse.x;
-            st_obj->mouse_evt->y = mouse.y;
-        } else {
-            st_obj->mouse_evt->hover = sfFalse;
-        }
+    if (sfFloatRect_contains(&box, mouse.x, mouse.y)) {
+        st_obj->mouse_evt->hover = sfTrue;
+        st_obj->mouse_evt->x = mouse.x;
+        st_obj->mouse_evt->y = mouse.y;
+    } else {
+        st_obj->mouse_evt->hover = sfFalse;
     }
+}
+
+void mouse_evt_update_button(void *obj, sfEvent evt)
+{
+    obj_t *st_obj = (obj_t *)obj;
+    sfVector2f mouse = {0, 0};
+    sfFloatRect box = {0, 0, 0, 0};
+
     if (evt.type == sfEvtMouseButtonPressed) {
-        mouse = (sfVector2f){evt.mouseButton.x, evt.mouseButton.y};
+        mouse = VECT2F(evt.mouseButton.x, evt.mouseButton.y);
+        box = VGET(obj, get_box);
         if (sfFloatRect_contains(&box, mouse.x, mouse.y)) {
             st_obj->mouse_evt->active = sfTrue;
             st_obj->mouse_evt->focus = sfTrue;
@@ -42,41 +48,44 @@ void mouse_evt_updater(void *obj, sfEvent evt)
             st_obj->mouse_evt->active = sfFalse;
             st_obj->mouse_evt->focus = sfFalse;
         }
-    }
-    if (evt.type == sfEvtMouseButtonReleased) {
+    } else if (evt.type == sfEvtMouseButtonReleased) {
         st_obj->mouse_evt->active = sfFalse;
     }
 }
 
-void launch_on_active_func(hub_t *hub, void *obj)
+void mouse_evt_updater(void *obj, sfEvent evt)
 {
-    obj_t *st_obj = obj;
+    obj_t *st_obj = (obj_t *)obj;
 
-    if (st_obj->on_active) {
-        if (st_obj->mouse_evt->active || st_obj->mouse_evt->hover)
-            st_obj->on_active(hub, st_obj);
-        else if (st_obj->mouse_evt->focus)
-            st_obj->on_active(hub, st_obj);
+    FAIL_IF_VOID(!st_obj);
+    if (evt.type == sfEvtMouseMoved) {
+        mouse_evt_update_move(obj, evt);
+    }
+    if (evt.type == 9 || evt.type == 10) {
+        if (st_obj->state) {
+            mouse_evt_update_button(obj, evt);
+        } else {
+            st_obj->mouse_evt->active = sfFalse;
+            st_obj->mouse_evt->focus = sfFalse;
+            st_obj->mouse_evt->hover = sfFalse;
+        }
     }
 }
 
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt)
 {
-    obj_t *begin = NULL;
+    obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
-    obj_t *next = NULL;
+    int check = 0;
 
     FAIL_IF_VOID(evt.type != 11 && evt.type != 9 && evt.type != 10);
     FAIL_IF_VOID(!hub || !hub->scenes || !((scene_t *)hub->scenes)->objs);
-    begin = ((scene_t *)hub->scenes)->objs;
-    curr = begin;
-    next = curr->next;
-    while (next != begin) {
+    while (list_poll((void *)begin, (void **)&curr)) {
         mouse_evt_updater(curr, evt);
-        launch_on_active_func(hub, curr);
-        curr = next;
-        next = (obj_t *)next->next;
-    };
-    mouse_evt_updater(curr, evt);
-    launch_on_active_func(hub, curr);
+        check = curr->on_active ? 1 : 0;
+        if ((curr->mouse_evt->active || curr->mouse_evt->focus) && check)
+            curr->on_active(hub, curr);
+        else if (curr->mouse_evt->hover && check)
+            curr->on_active(hub, curr);
+    }
 }

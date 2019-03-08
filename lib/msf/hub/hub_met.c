@@ -22,7 +22,7 @@ void hub_add_scene(void *hub, void *scene, char *label)
 
     FAIL_IF_VOID(!st_hub || !scene);
     node_ctor(scene, label, NULL);
-    list_append(&st_hub->scenes, scene);
+    list_append((void **)&st_hub->scenes, scene);
 }
 
 void hub_render(hub_t *hub)

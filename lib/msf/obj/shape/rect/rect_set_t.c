@@ -53,5 +53,5 @@ void rect_set_size(void *rect, sfVector2u size)
     actual_scale = rect_get_scale(rect);
     st_rect->physics->size.x = size.x * actual_scale.x;
     st_rect->physics->size.y = size.y * actual_scale.y;
-    sfRectangleShape_setSize(st_rect->shape, (sfVector2f){size.x, size.y});
+    sfRectangleShape_setSize(st_rect->shape, VECT2F(size.x, size.y));
 }

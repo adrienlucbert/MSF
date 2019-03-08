@@ -16,25 +16,26 @@ void anim_obj_add_anim(void *obj, void *anim, char *label)
     list_append(&st_obj->anims, anim);
 }
 
-void anim_obj_animate(void *anim_obj)
+void anim_obj_animate(hub_t *hub, void *anim_obj)
 {
     anim_obj_t *st_anim_obj = (anim_obj_t *)anim_obj;
     anim_t *st_anim = NULL;
     frame_t *st_frame = NULL;
-    sfInt64 elapsed_time = 0;
+    float elapsed_time = 0;
+    int i = 0;
 
-    FAIL_IF_VOID(!st_anim_obj);
+    FAIL_IF_VOID(!st_anim_obj || !(anim_t *)st_anim_obj->anims);
     st_anim = (anim_t *)st_anim_obj->anims;
-    FAIL_IF_VOID(!st_anim);
     st_frame = (frame_t *)st_anim->frames;
-    FAIL_IF_VOID(!st_frame);
-    elapsed_time = sfClock_getElapsedTime(st_anim_obj->timer).microseconds;
-    if (st_frame->next != st_frame) {
-        if (elapsed_time / 1000 >= st_anim->frame_duration) {
-            st_anim->frames = st_frame->next;
-            sfClock_restart(st_anim_obj->timer);
-        }
+    FAIL_IF_VOID(!st_frame || st_frame->next == st_frame);
+    elapsed_time = sfClock_getElapsedTime(hub->timer).microseconds / 1000;
+    elapsed_time += st_anim_obj->elapsed / 1000;
+    while (elapsed_time >= st_anim->frame_duration) {
+        st_anim->frames = st_frame->next;
+        elapsed_time -= st_anim->frame_duration;
+        ++i;
     }
+    st_anim_obj->elapsed = elapsed_time * 1000;
 }
 
 void anim_obj_render(void *anim_obj, hub_t *hub)
@@ -47,7 +48,7 @@ void anim_obj_render(void *anim_obj, hub_t *hub)
     st_anim = (anim_t *)st_anim_obj->anims;
     FAIL_IF_VOID(!st_anim || !st_anim->frames);
     st_frame = (frame_t *)st_anim->frames;
-    anim_obj_animate(anim_obj);
+    anim_obj_animate(hub, anim_obj);
     sfSprite_setTexture(st_anim_obj->sprite, st_frame->texture, sfTrue);
     sfRenderWindow_drawSprite(hub->window, st_anim_obj->sprite, NULL);
 }

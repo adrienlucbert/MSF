@@ -12,7 +12,7 @@ void *my_memdup(const void *src, size_t n)
     int len = 0;
     void *dest = NULL;
 
-    if (n == -1) {
+    if (n == (size_t)-1) {
         len = my_memlen(src, sizeof(char)) + 1;
         dest = my_calloc(len, sizeof(char));
     } else {

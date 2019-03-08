@@ -23,7 +23,7 @@ void manifold_ctor(void *manifold, obj_physics_t *phy_a, obj_physics_t *phy_b)
     st_manifold->phy_a = phy_a;
     st_manifold->phy_b = phy_b;
     st_manifold->penetration = 0;
-    st_manifold->normal = (sfVector2f){0, 0};
+    st_manifold->normal = VECT2F(0, 0);
 }
 
 void manifold_destroy(void *manifold)

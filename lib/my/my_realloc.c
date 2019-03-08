@@ -11,7 +11,6 @@
 void *my_realloc(void *ptr, size_t size)
 {
     void *dest = malloc(size);
-    int index = 0;
 
     my_memset(dest, 0, size);
     if (dest)

@@ -11,9 +11,9 @@ void *my_memmem(void const *hay, size_t h_len, void const *nee, size_t n_len)
 {
     char *c_haystack = (char *)hay;
     char *c_needle = (char *)nee;
-    h_len = h_len == -1 ? my_memlen(hay, sizeof(char)) : h_len;
-    n_len = n_len == -1 ? my_memlen(nee, sizeof(char)) : n_len;
 
+    h_len = h_len == (size_t)-1 ? (size_t)my_memlen(hay, sizeof(char)) : h_len;
+    n_len = n_len == (size_t)-1 ? (size_t)my_memlen(nee, sizeof(char)) : n_len;
     if (n_len == 0)
         return ((void *)c_haystack);
     c_haystack = my_memchr(hay, *c_needle, h_len);

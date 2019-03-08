@@ -14,8 +14,6 @@
 #endif
 #define RAD(deg)            ((deg) * M_PI / 180)
 #define DEG(rad)            ((rad) * 180 / M_PI)
-#define DEFAULT_GRAVITY     0.5
-#define DEFAULT_RESTITUTION 0.5
 
 #ifndef FAIL_IF
     #define FAIL_IF(cond, exit_status)     if (cond) return (exit_status)
@@ -24,7 +22,8 @@
 
 #define VECT2F(x, y) (sfVector2f){x, y}
 #define VECT2U(x, y) (sfVector2u){x, y}
-#define RECT(top, left, width, height) (sfFloatRect){top, left, width, height}
+#define VECT2I(x, y) (sfVector2i){x, y}
+#define RECT(left, top, width, height) (sfFloatRect){left, top, width, height}
 #define RGBA(R, G, B, A) (sfColor){R, G, B, A}
 
 #define VFUNC(THIS, FUNC, ...) if (THIS && ((obj_t *)THIS)->vtable->FUNC) \

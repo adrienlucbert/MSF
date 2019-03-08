@@ -70,7 +70,7 @@ sfBool circle_circle_collision(manifold_t *m)
 
     m->penetration = (radius_a + radius_b) - vector_magnitude(a_to_b);
     FAIL_IF(m->penetration < 0, sfFalse);
-    m->normal = (sfVector2f){a_to_b.y, a_to_b.x};
+    m->normal = VECT2F(a_to_b.y, a_to_b.x);
     m->normal = vector_normalize(m->normal);
     if (m->normal.x != m->normal.x)
         m->normal.x = 0;
@@ -81,18 +81,14 @@ sfBool circle_circle_collision(manifold_t *m)
 
 sfBool aabb_circle_collision(manifold_t *m, sfBool aabb_first)
 {
-    obj_physics_t *aabb = m->phy_a;
-    obj_physics_t *circ = m->phy_b;
+    obj_physics_t *aabb = aabb_first ? m->phy_a : m->phy_b;
+    obj_physics_t *circ = aabb_first ? m->phy_b : m->phy_a;
     sfVector2f near;
     sfVector2f near_to_circ;
 
-    if (aabb_first == sfFalse) {
-        aabb = m->phy_b;
-        circ = m->phy_a;
-    }
     near.x = fmax(aabb->pos.x, fmin(circ->pos.x, aabb->pos.x + aabb->size.x));
     near.y = fmax(aabb->pos.y, fmin(circ->pos.y, aabb->pos.y + aabb->size.y));
-    near_to_circ = (sfVector2f){circ->pos.x - near.x, circ->pos.y - near.y};
+    near_to_circ = VECT2F(circ->pos.x - near.x, circ->pos.y - near.y);
     m->penetration = circ->radius - vector_magnitude(near_to_circ);
     FAIL_IF(m->penetration < 0, sfFalse);
     m->normal.x = circ->pos.y - near.y;

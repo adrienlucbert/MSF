@@ -24,13 +24,13 @@ void physics_ctor(void *physics, void *obj)
     st_physics->angle = 0;
     st_physics->gravity = 0;
     st_physics->restitution = 0;
-    st_physics->speed = (sfVector2f){0, 0};
+    st_physics->speed = VECT2F(0, 0);
     st_physics->mass = 1;
     st_physics->inv_mass = (st_physics->mass == 0 ? 0 : 1 / st_physics->mass);
     if (st_obj->vtable->get_size)
         st_physics->size = VGET(st_obj, get_size);
     else
-        st_physics->size = (sfVector2u){0, 0};
+        st_physics->size = VECT2U(0, 0);
     st_physics->pos = VGET(st_obj, get_position);
     st_physics->scale = VGET(st_obj, get_scale);
     if (st_obj->vtable->get_radius)

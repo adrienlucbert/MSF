@@ -26,7 +26,7 @@ sfVector2f rect_get_position(void *rect)
     FAIL_IF(!st_rect || !st_rect->shape, position);
     origin = VGET(rect, get_origin);
     position = sfRectangleShape_getPosition(st_rect->shape);
-    position = (sfVector2f){position.x - origin.x, position.y - origin.y};
+    position = VECT2F(position.x - origin.x, position.y - origin.y);
     return (position);
 }
 
@@ -60,6 +60,6 @@ sfVector2u rect_get_size(void *rect)
     FAIL_IF(!st_rect || !st_rect->shape, usize);
     scale = VGET(rect, get_scale);
     fsize = sfRectangleShape_getSize(st_rect->shape);
-    usize = (sfVector2u){fsize.x * scale.x, fsize.y * scale.y};
+    usize = VECT2U(fsize.x * scale.x, fsize.y * scale.y);
     return (usize);
 }

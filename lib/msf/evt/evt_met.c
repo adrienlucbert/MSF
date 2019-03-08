@@ -9,19 +9,14 @@
 
 void evt_trigger_scope(void *evts, evt_scope scope, hub_t *hub, sfEvent data)
 {
-    evt_t *curr = (evt_t *)evts;
-    evt_t *next = NULL;
+    evt_t *curr = NULL;
 
-    FAIL_IF_VOID(!curr || !hub);
-    next = curr->next;
-    while (next != evts) {
-        if (curr->scope == scope)
+    FAIL_IF_VOID(!evts || !hub);
+    while (list_poll(evts, (void **)&curr)) {
+        if (curr->scope == scope) {
             evt_trigger(curr, hub, data);
-        curr = next;
-        next = next->next;
-    };
-    if (curr->scope == scope)
-        evt_trigger(curr, hub, data);
+        }
+    }
 }
 
 void evt_trigger(void *evt, hub_t *hub, sfEvent data)

@@ -19,7 +19,7 @@ int my_memcmp(const void *s1, const void *s2, size_t n)
         return (-c_s2[0]);
     else if (!c_s2)
         return (c_s1[0]);
-    while ((index < n || n == -1) && c_s1 && c_s2) {
+    while ((index < n || n == (size_t)-1) && c_s1 && c_s2) {
         if (c_s1[index] != c_s2[index] || (!c_s1[index] && !c_s2[index]))
             return (c_s1[index] - c_s2[index]);
         ++index;

@@ -43,3 +43,18 @@ void objs_set_volume(void *obj, float volume)
     }
     obj_set_volume(next, volume);
 }
+
+void obj_sound_apply(obj_t *obj, void (*func)(sfSound *))
+{
+    FAIL_IF_VOID(!obj || !func || !obj->sound);
+    func(obj->sound);
+}
+
+void objs_sound_apply(obj_t *obj, void (*func)(sfSound *))
+{
+    obj_t *tmp = NULL;
+
+    FAIL_IF_VOID(!obj || !func);
+    while (list_poll(obj, (void **)&tmp))
+        obj_sound_apply(tmp, func);
+}

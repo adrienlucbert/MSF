@@ -17,7 +17,8 @@ enum msf_obj_type_e {
     text,
     animated,
     input,
-    shape
+    shape,
+    custom
 };
 
 enum msf_obj_fixing_e {
@@ -109,9 +110,11 @@ struct msf_obj_physics_s {
 **      type        type of the object
 **      group       group of the object
 **      state       whether object is dead or alive (to be rendered or not)
-**      speed       move speed of the object
-**      pos         position of the object in the scene
-**      display     display function for the object (depending on its type)
+**      is_collider whether object must collide with other colliders or not
+**      vtable      table of virtual functions for the object
+**      physics     data for managing physics and collisions between objects
+**      mouse_evt   data related to mouse events on the object
+**      extra       optional data for whatever purpose needed by the project
 */
 struct msf_game_obj_s {
     // msf_node_s inherited properties
@@ -127,6 +130,7 @@ struct msf_game_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void *extra;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
@@ -155,6 +159,7 @@ struct msf_text_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void *extra;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
@@ -189,12 +194,13 @@ struct msf_animated_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void *extra;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
 
     sfSprite *sprite;
-    sfClock *timer;
+    sfInt64 elapsed;
     void *anims;
 };
 
@@ -246,6 +252,7 @@ struct msf_input_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void *extra;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
@@ -273,6 +280,7 @@ struct msf_shape_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void *extra;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
@@ -299,6 +307,7 @@ sfBool obj_collide_with_all(hub_t *hub, void *obj);
 sfBool obj_apply_collision_with_all(hub_t *hub, void *obj);
 sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
 sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group);
+void obj_recenter_origin(void *obj);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
@@ -439,6 +448,7 @@ void input_obj_destroy(void *input_obj);
 // INPUT MET
 void input_obj_render(void *input_obj, hub_t *hub);
 void input_obj_recenter(void *input_obj);
+void input_obj_auto_scale_fg(input_obj_t *st_input);
 
 // INPUT SET
 void input_obj_set_activity(void *inpt_obj, void (*on_active)(hub_t *, void *));

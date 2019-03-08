@@ -32,6 +32,7 @@ struct msf_scene_s {
     sfVector2f cam_speed;
     sfVector2f cam_pos;
     sfSound *sound;
+    sfColor clear;
 };
 
 /*
