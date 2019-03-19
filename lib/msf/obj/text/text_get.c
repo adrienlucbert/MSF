@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** MUL_my_defender_2018
+** MSF
 ** File description:
 ** text_get
 */
