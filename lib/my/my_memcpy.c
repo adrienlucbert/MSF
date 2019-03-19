@@ -13,7 +13,7 @@ void *my_memcpy(void *dest, const void *src, size_t n)
     char *c_src = (char *)src;
     char *c_dest = (char *)dest;
 
-    while ((index < n || n == (size_t )-1) && c_src != NULL && c_src[index]) {
+    while ((index < n || n == (size_t)-1) && c_src != NULL && c_src[index]) {
         c_dest[index] = c_src[index];
         ++index;
     }

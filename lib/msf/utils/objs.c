@@ -14,10 +14,12 @@ sfVector2f objs_vector(obj_t *obj_a, obj_t *obj_b)
     sfFloatRect box_b = {0, 0, 0, 0};
 
     FAIL_IF(!obj_a || !obj_b || !obj_a->physics || !obj_b->physics, v);
+    FAIL_IF(!obj_a->vtable || !obj_a->vtable->get_box, v);
+    FAIL_IF(!obj_b->vtable || !obj_b->vtable->get_box, v);
     box_a = VGET(obj_a, get_box);
     box_b = VGET(obj_b, get_box);
-    v.x = (box_b.left + box_b.width / 2) - (box_a.left);
-    v.y = (box_b.top + box_b.height / 2) - (box_a.top);
+    v.x = (box_b.left + box_b.width / 2) - (box_a.left + box_a.width / 2);
+    v.y = (box_b.top + box_b.height / 2) - (box_a.top + box_a.height / 2);
     return (v);
 }
 
@@ -38,7 +40,7 @@ float objs_angle(obj_t *obj_a, obj_t *obj_b)
     float angle_abx = 0;
 
     FAIL_IF(!obj_a || !obj_b || !obj_a->physics || !obj_b->physics, 0);
-    if (obj_a->physics->speed.x != 0 || obj_b->physics->speed.y != 0) {
+    if (obj_a->physics->speed.x != 0 || obj_a->physics->speed.y != 0) {
         v_a = obj_a->physics->speed;
         angle_ax = angle_between_vectors(x_axis, v_a);
     }

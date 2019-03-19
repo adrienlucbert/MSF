@@ -64,6 +64,8 @@ void hub_add_buffer(void *hub, void *buffer, char *label);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);
+void mouse_evt_update_button(void *obj, sfEvent evt);
+void mouse_evt_updater(void *obj, sfEvent evt);
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt);
 
 // HUB SETTERS
@@ -77,6 +79,7 @@ void window_destroy(sfRenderWindow *window);
 void window_set_icon(sfRenderWindow *window, char *path);
 
 // WINDOW MET
+void window_clear(hub_t *hub);
 void window_render(hub_t *hub);
 
 #endif /* !MSF_HUB_H_ */

@@ -22,6 +22,7 @@ SRC			=	utils/vector.c							\
 				scene/scene_tor.c						\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
+				scene/scene_clear_objs.c				\
 				sound/sound_buffer_tor.c				\
 				sound/sound_hub_set.c					\
 				sound/sound_scene_set.c					\
@@ -84,6 +85,11 @@ SRC			=	utils/vector.c							\
 				obj/anim/animation/animation_set.c		\
 				obj/anim/animation/frame/frame_tor.c	\
 				obj/anim/animation/frame/frame_met.c	\
+				obj/sound/sound_tor.c					\
+				obj/sound/sound_set.c					\
+				obj/sound/sound_get.c					\
+				obj/sound/sound_vtable.c				\
+				obj/sound/sound_met.c					\
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 
@@ -95,7 +101,7 @@ PATHNAME	=	../$(NAME)
 CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio
 LDLIBS		=	-L../ -lmy $(CSFML) -lm
 INCLUDE		=	-I../../include
-CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
+CFLAGS		=	-Wextra -Wall $(INCLUDE) $(LDLIBS)
 
 all:
 	uptodate=0;\

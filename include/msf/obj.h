@@ -18,6 +18,7 @@ enum msf_obj_type_e {
     animated,
     input,
     shape,
+    sound,
     custom
 };
 
@@ -68,6 +69,14 @@ struct msf_obj_vtable_s {
     sfFloatRect (*get_box)          (void *);
 };
 
+
+/*
+** User data dtor
+*/
+struct msf_udata_dtor_s {
+    void (*dtor)(void *);
+};
+
 /*
 **  Game Object Mouse Event
 **      focus       is object focused (last clicked object)
@@ -114,7 +123,7 @@ struct msf_obj_physics_s {
 **      vtable      table of virtual functions for the object
 **      physics     data for managing physics and collisions between objects
 **      mouse_evt   data related to mouse events on the object
-**      extra       optional data for whatever purpose needed by the project
+**      udata       optional data for whatever purpose needed by the project
 */
 struct msf_game_obj_s {
     // msf_node_s inherited properties
@@ -130,10 +139,11 @@ struct msf_game_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
-    void *extra;
+    void *udata;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 };
 
 /*
@@ -159,15 +169,14 @@ struct msf_text_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
-    void *extra;
+    void *udata;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     sfText *text;
     sfFont *font;
-    sfColor color;
-    uint char_size;
     char *str;
 };
 
@@ -194,10 +203,11 @@ struct msf_animated_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
-    void *extra;
+    void *udata;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     sfSprite *sprite;
     sfInt64 elapsed;
@@ -218,6 +228,7 @@ struct msf_anim_s {
     sfVector2f origin;
     uint frame_duration;
     void *frames;
+    sfBool loop;
 };
 
 /*
@@ -231,6 +242,7 @@ struct msf_frame_s {
     void (*dtor)(void *);
 
     sfTexture *texture;
+    int index;
 };
 
 /*
@@ -252,10 +264,11 @@ struct msf_input_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
-    void *extra;
+    void *udata;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     void *background;
     void *foreground;
@@ -280,12 +293,43 @@ struct msf_shape_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
-    void *extra;
+    void *udata;
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     void *shape;
+};
+
+
+/*
+**  Sound Game Object
+*/
+struct msf_sound_obj_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
+    // msf_game_obj_s inherited properties
+    obj_fixing fixing;
+    obj_type type;
+    int group;
+    sfBool state;
+    sfBool is_collider;
+    obj_vtable_t *vtable;
+    obj_physics_t *physics;
+    obj_mouse_evt_t *mouse_evt;
+    void *udata;
+    void (*on_active)(hub_t *, void *);
+    sfSound *sound;
+    int nbr;
+    sfBool is_alive;
+
+    sfInt64 elapsed;
+    sfInt64 repeat_delay;
+    sfBool loop;
 };
 
 /*
@@ -308,6 +352,7 @@ sfBool obj_apply_collision_with_all(hub_t *hub, void *obj);
 sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
 sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group);
 void obj_recenter_origin(void *obj);
+void obj_kill(void *obj);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
@@ -429,13 +474,15 @@ void anim_destroy(void *anim);
 
 // ANIM MET
 void anim_add_frame(void *anim, void *frame, char *label);
+void anim_set_loop(void *anim, sfBool loop);
+void anim_reset_loop(void *anim);
 
 // ANIM SET
 void anim_set_frames(void *anim, char *filepath, int nb_frames);
 
 // FRAME TOR
-void *frame_new(sfTexture *texture);
-void frame_ctor(void *frame, sfTexture *texture);
+void *frame_new(sfTexture *texture, int frm_index);
+void frame_ctor(void *frame, sfTexture *texture, int frm_index);
 void frame_dtor(void *frame);
 void frame_destroy(void *frame);
 
@@ -549,5 +596,27 @@ void rect_vtable_ctor_met(void *obj_vtable);
 void rect_vtable_ctor_set(void *obj_vtable);
 void rect_vtable_ctor_get(void *obj_vtable);
 void rect_vtable_destroy(void *obj_vtable);
+
+// SOUND_OBJ TOR
+void *sound_obj_new(hub_t *hub, char *buffer);
+void sound_obj_ctor(void *obj, hub_t *hub, char *buffer);
+void sound_obj_destroy(void *shape_obj);
+
+// SOUND_OBJ MET
+void sound_obj_render(void *sound, hub_t *hub);
+
+// SOUND_OBJ SET
+void sound_obj_set_loop(void *sound, sfBool loop, sfInt64 delay);
+
+// SOUND_OBJ GET
+sfSoundStatus sound_obj_get_status(void *sound);
+sfBool sound_obj_get_loop(void *sound);
+
+// SOUND_OBJ VTABLE
+void *sound_obj_vtable_new(void);
+void sound_obj_vtable_ctor_met(void *obj_vtable);
+void sound_obj_vtable_ctor_set(void *obj_vtable);
+void sound_obj_vtable_ctor_get(void *obj_vtable);
+void sound_obj_vtable_destroy(void *obj_vtable);
 
 #endif /* !MSF_OBJ_H_ */

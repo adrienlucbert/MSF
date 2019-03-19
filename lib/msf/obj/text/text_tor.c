@@ -22,11 +22,11 @@ void text_obj_ctor(void *text_obj, char *str, sfColor color, uint char_size)
 
     FAIL_IF_VOID(!st_text_obj);
     obj_ctor(st_text_obj, text, sfFalse);
+    st_text_obj->str = str ? my_memdup(str, -1) : NULL;
     st_text_obj->text = sfText_create();
     st_text_obj->vtable = text_obj_vtable_new();
-    st_text_obj->font = NULL;
-    st_text_obj->str = NULL;
-    text_obj_set_font(st_text_obj, "assets/font/open_sans.ttf");
+    st_text_obj->font = sfFont_createFromFile("assets/font/open_sans.ttf");
+    sfText_setFont(st_text_obj->text, st_text_obj->font);
     text_obj_set_color(st_text_obj, color);
     text_obj_set_char_size(st_text_obj, char_size);
     text_obj_set_string(st_text_obj, str);

@@ -81,6 +81,7 @@ int concat_di(char **str, va_list ap)
         return (0);
     arg_len = my_memlen(arg, sizeof(char));
     *str = my_memcat(*str, arg);
+    free(arg);
     return (arg_len);
 }
 

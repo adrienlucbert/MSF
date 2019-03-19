@@ -27,6 +27,7 @@ void scene_ctor(void *scene)
     st_scene->clear = sfBlack;
     st_scene->cam_pos = VECT2F(0, 0);
     st_scene->cam_speed = VECT2F(0, 0);
+    st_scene->udata = NULL;
     st_scene->dtor = scene_dtor;
 }
 
@@ -39,6 +40,10 @@ void scene_dtor(void *scene)
     if (st_scene->sound) {
         sfSound_stop(st_scene->sound);
         sfSound_destroy(st_scene->sound);
+    }
+    if (st_scene->udata) {
+        ((udata_dtor_t *)st_scene->udata)->dtor(st_scene->udata);
+        free(st_scene->udata);
     }
 }
 

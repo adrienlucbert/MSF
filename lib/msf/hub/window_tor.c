@@ -13,7 +13,7 @@ sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style)
     sfRenderWindow *window = NULL;
 
     window = sfRenderWindow_create(mode, title, style, NULL);
-    sfRenderWindow_setFramerateLimit(window, 144);
+    sfRenderWindow_setFramerateLimit(window, 60);
     return (window);
 }
 

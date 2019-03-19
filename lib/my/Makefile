@@ -31,7 +31,7 @@ PATHNAME	=	../$(NAME)
 CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio
 LDLIBS		=	-L../ -lmy $(CSFML) -lm
 INCLUDE		=	-I../../include
-CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
+CFLAGS		=	-Wextra -Wall $(INCLUDE) $(LDLIBS)
 
 all:
 	uptodate=0;\

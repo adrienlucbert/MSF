@@ -23,7 +23,7 @@ void *my_calloc(size_t nmemb, size_t size);
 void *my_memset(void *s, int c, size_t n);
 void *my_realloc(void *ptr, size_t size);
 void *my_memcpy(void *dest, const void *src, size_t n);
-int my_memcmp(const void *s1, const void *s2, size_t n);
+int my_memcmp(void *m1, void *m2, long n);
 int my_memlen(void const *ptr, size_t size);
 void *my_memdup(const void *src, size_t n);
 void *my_memcat(void *dest, void const *src);

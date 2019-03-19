@@ -13,8 +13,18 @@ void window_render(hub_t *hub)
 
     FAIL_IF_VOID(!hub || !hub->scenes || !hub->timer);
     delay = sfClock_getElapsedTime(hub->timer).microseconds;
-    if (delay / 1000 >= 1000 / hub->framerate) {
+    if (delay >= (1000 / hub->framerate) * 1000) {
         hub_render(hub);
-        sfClock_restart(hub->timer);
+    }
+}
+
+void window_clear(hub_t *hub)
+{
+    sfInt64 delay = 0;
+
+    FAIL_IF_VOID(!hub || !hub->scenes || !hub->timer);
+    delay = sfClock_getElapsedTime(hub->timer).microseconds;
+    if (delay >= (1000 / hub->framerate) * 1000) {
+        sfRenderWindow_clear(hub->window, ((scene_t *)hub->scenes)->clear);
     }
 }

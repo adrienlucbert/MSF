@@ -14,5 +14,6 @@ void hub_set_framerate(void *hub, uint framerate)
     FAIL_IF_VOID(!st_hub);
     if (framerate > 0) {
         st_hub->framerate = framerate;
+        sfRenderWindow_setFramerateLimit(st_hub->window, 60);
     }
 }

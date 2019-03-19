@@ -23,6 +23,7 @@ void anim_ctor(void *anim, char *filepath, int nb_frames, uint frame_duration)
     FAIL_IF_VOID(!st_anim);
     st_anim->frame_duration = frame_duration;
     st_anim->frames = NULL;
+    st_anim->loop = sfTrue;
     anim_set_frames(anim, filepath, nb_frames);
     st_anim->dtor = anim_dtor;
 }

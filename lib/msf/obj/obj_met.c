@@ -6,7 +6,6 @@
 */
 
 #include "msf/msf.h"
-#include <stdio.h>
 
 void obj_render(void *obj, hub_t *hub)
 {
@@ -22,16 +21,16 @@ void obj_move(void *obj, hub_t *hub)
     obj_t *st_obj = (obj_t *)obj;
     obj_physics_t *st_physics = NULL;
     sfVector2f position;
-    float elapsed_ms = 0;
+    sfInt64 elapsed_sec = 0;
 
     FAIL_IF_VOID(!st_obj || !st_obj->physics || !hub);
-    elapsed_ms = sfClock_getElapsedTime(hub->timer).microseconds / 1000;
+    elapsed_sec = sfClock_getElapsedTime(hub->timer).microseconds;
     st_physics = st_obj->physics;
     if (!obj_apply_collision_with_all(hub, obj))
         st_physics->speed.y += st_obj->physics->gravity;
     position = VGET(st_obj, get_position);
-    position.x += st_physics->speed.x * elapsed_ms;
-    position.y += st_physics->speed.y * elapsed_ms;
+    position.x += (st_physics->speed.x * elapsed_sec) / 1000000;
+    position.y += (st_physics->speed.y * elapsed_sec) / 1000000;
     VFUNC(st_obj, set_position, position);
 }
 
@@ -58,4 +57,12 @@ void obj_recenter_origin(void *obj)
     origin.x = size.x / 2;
     origin.y = size.y / 2;
     VFUNC(st_obj, set_origin, origin);
+}
+
+void obj_kill(void *obj)
+{
+    obj_t *st_obj = obj;
+
+    st_obj->state = sfFalse;
+    st_obj->is_alive = sfFalse;
 }

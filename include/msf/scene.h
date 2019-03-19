@@ -33,6 +33,7 @@ struct msf_scene_s {
     sfVector2f cam_pos;
     sfSound *sound;
     sfColor clear;
+    void *udata;
 };
 
 /*
@@ -48,6 +49,7 @@ void scene_destroy(void *scene);
 void scene_add_evt(void *scene, void *evt, char *label);
 void scene_add_obj(void *scene, void *obj, char *label);
 void scene_render(hub_t *hub, void *scene);
+void scene_clear_objs(scene_t *scene);
 
 // SCENE SETTERS
 void scene_set_cam_speed(void *scene, float sx, float sy);
