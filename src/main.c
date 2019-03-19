@@ -14,7 +14,7 @@ int main(void)
     sfEvent evt;
 
     while (sfRenderWindow_isOpen(hub->window)) {
-        sfRenderWindow_clear(hub->window, sfWhite);
+        sfRenderWindow_clear(hub->window, sfYellow);
         hub_trigger_evts_scope(hub, context, evt);
         while (sfRenderWindow_pollEvent(hub->window, &evt)) {
             hub_trigger_evts_scope(hub, inputs, evt);
