@@ -359,6 +359,11 @@ void obj_set_group(void *obj, int group);
 void obj_set_state(void *obj, sfBool state);
 void obj_set_speed(void *obj, float sx, float sy);
 void obj_set_pos(void *obj, float x, float y);
+void obj_set_sound_buffer(hub_t *hub, void *obj, char *label);
+void obj_set_volume(void *obj, float volume);
+void objs_set_volume(void *obj, float volume);
+void obj_sound_apply(obj_t *obj, void (*func)(sfSound *));
+void objs_sound_apply(obj_t *obj, void (*func)(sfSound *));
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);

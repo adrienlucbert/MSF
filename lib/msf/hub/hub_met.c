@@ -43,12 +43,3 @@ void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data)
     FAIL_IF_VOID(!st_scene || !st_scene->evts);
     evt_trigger_scope(st_scene->evts, scope, hub, data);
 }
-
-void hub_add_buffer(void *hub, void *buffer, char *label)
-{
-    hub_t *st_hub = (hub_t *)hub;
-
-    FAIL_IF_VOID(!st_hub || !buffer);
-    node_ctor(buffer, label, NULL);
-    list_append((void *)(&st_hub->sound_buffers), buffer);
-}

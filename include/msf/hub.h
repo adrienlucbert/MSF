@@ -26,10 +26,28 @@ struct msf_manifold_s {
     sfVector2f normal;
 };
 
-struct msf_image_s {
+
+/*
+** Sound buffer structure ton contain loaded sound buffers
+*/
+struct msf_sound_buffer_s {
+    // msf_node_s inherited properties
     char *label;
     void *next;
     void (*dtor)(void *);
+
+    sfSoundBuffer *buffer;
+};
+
+/*
+** Image structure ton contain loaded images
+*/
+struct msf_image_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
     sfImage *sheet;
 };
 
@@ -72,6 +90,7 @@ void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data);
 void hub_add_buffer(void *hub, void *buffer, char *label);
 sfBool hub_load_image(hub_t *hub, char *path, char *label);
 void hub_add_image(hub_t *hub, image_t *image, char *label);
+sfBool hub_load_buffer(hub_t *hub, char *path, char *label);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);
@@ -81,6 +100,11 @@ void mouse_evt_updater_evt(hub_t *hub, sfEvent evt);
 
 // HUB SETTERS
 void hub_set_framerate(void *hub, uint framerate);
+void hub_set_sound_buffer(hub_t *hub, char *label);
+void hub_set_volume(hub_t *hub, float volume);
+void hub_set_global_volume(hub_t *hub, float volume);
+void hub_sound_apply(hub_t *hub, void (*func)(sfSound *));
+void hub_global_sound_apply(hub_t *hub, void (*func)(sfSound *));
 
 // WINDOW CTOR
 sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style);
@@ -92,6 +116,12 @@ void window_set_icon(sfRenderWindow *window, char *path);
 // WINDOW MET
 void window_clear(hub_t *hub);
 void window_render(hub_t *hub);
+
+// SOUND TOR
+void *sound_buffer_new(char *path);
+void sound_buffer_ctor(void *sound_buffer, char *path);
+void sound_buffer_dtor(void *sound_buffer);
+void sound_buffer_destroy(void *sound_buffer);
 
 // IMAGE TOR
 void *image_new(char *path);
