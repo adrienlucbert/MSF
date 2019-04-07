@@ -12,25 +12,27 @@ SRC			=	utils/vector.c							\
 				ll/node_met.c							\
 				hub/hub_tor.c							\
 				hub/hub_met.c							\
+				hub/hub_met_t.c							\
 				hub/hub_set.c							\
+				hub/hub_set_s.c							\
 				hub/window_tor.c						\
 				hub/window_set.c						\
 				hub/window_met.c						\
 				hub/global_evts.c						\
+				hub/image/image_tor.c					\
+				hub/sound/sound_buffer_tor.c			\
 				evt/evt_tor.c							\
 				evt/evt_met.c							\
 				scene/scene_tor.c						\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
+				scene/scene_set_s.c						\
+				scene/scene_set_s_global.c				\
 				scene/scene_clear_objs.c				\
-				sound/sound_buffer_tor.c				\
-				sound/sound_hub_set.c					\
-				sound/sound_scene_set.c					\
-				sound/sound_scene_set_global.c			\
-				sound/sound_obj_set.c					\
 				obj/obj_tor.c							\
 				obj/obj_met.c							\
 				obj/obj_set.c							\
+				obj/obj_set_s.c							\
 				obj/mouse_evt.c							\
 				obj/physics/physics_tor.c				\
 				obj/physics/physics_met.c				\

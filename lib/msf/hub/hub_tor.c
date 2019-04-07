@@ -47,6 +47,10 @@ void hub_dtor(void *hub)
     manifold_destroy(st_hub->manifold);
     if (st_hub->sound)
         sfSound_destroy(st_hub->sound);
+    if (st_hub->udata) {
+        ((udata_t *)st_hub->udata)->dtor(st_hub->udata);
+        free(st_hub->udata);
+    }
 }
 
 void hub_destroy(void *hub)

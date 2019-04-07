@@ -8,14 +8,17 @@
 #include "msf/msf.h"
 #include <stdio.h>
 
-void anim_set_frames(void *anim, char *filepath, int nb_frames)
+void anim_set_frames(void *anim, hub_t *hub, char *image, int nb_frames)
 {
-    sfImage *sheet = sfImage_createFromFile(filepath);
-    sfVector2u size = sfImage_getSize(sheet);
+    FAIL_IF_VOID(!hub || !image)
+    image_t *st_image = hub && image ? list_fetch(hub->images, image) : NULL;
+    sfImage *sheet = st_image ? st_image->sheet : NULL;
+    sfVector2u size = sheet ? sfImage_getSize(sheet) : VECT2U(0, 0);
     sfIntRect area = {0, 0, size.x / nb_frames, size.y};
     sfTexture *texture = NULL;
     int frame_id = 0;
 
+    FAIL_IF_VOID(!hub || !image || !st_image || !sheet);
     while (frame_id < nb_frames) {
         texture = sfTexture_createFromImage(sheet, &area);
         anim_add_frame(anim, frame_new(texture, frame_id), NULL);
@@ -23,6 +26,14 @@ void anim_set_frames(void *anim, char *filepath, int nb_frames)
         ++frame_id;
     }
     sfImage_destroy(sheet);
+}
+
+void anim_set_frame_duration(void *anim, uint duration)
+{
+    anim_t *st_anim = anim;
+
+    FAIL_IF_VOID(!anim);
+    st_anim->frame_duration = duration;
 }
 
 void anim_set_loop(void *anim, sfBool loop)

@@ -73,7 +73,7 @@ struct msf_obj_vtable_s {
 /*
 ** User data dtor
 */
-struct msf_udata_dtor_s {
+struct msf_udata_s {
     void (*dtor)(void *);
 };
 
@@ -467,8 +467,8 @@ void anim_obj_vtable_ctor_get(void *obj_vtable);
 void anim_vtable_destroy(void *obj_vtable);
 
 // ANIM TOR
-void *anim_new(char *filepath, int nb_frames, uint frame_duration);
-void anim_ctor(void *anim, char *filepath, int nb_frames, uint frame_duration);
+void *anim_new(hub_t *hub, char *image, int nb_frames);
+void anim_ctor(void *anim, hub_t *hub, char *image, int nb_frames);
 void anim_dtor(void *anim);
 void anim_destroy(void *anim);
 
@@ -478,7 +478,8 @@ void anim_set_loop(void *anim, sfBool loop);
 void anim_reset_loop(void *anim);
 
 // ANIM SET
-void anim_set_frames(void *anim, char *filepath, int nb_frames);
+void anim_set_frame_duration(void *anim, uint duration);
+void anim_set_frames(void *anim, hub_t *hub, char *image, int nb_frames);
 
 // FRAME TOR
 void *frame_new(sfTexture *texture, int frm_index);

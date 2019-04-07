@@ -26,6 +26,13 @@ struct msf_manifold_s {
     sfVector2f normal;
 };
 
+struct msf_image_s {
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+    sfImage *sheet;
+};
+
 /*
 **  Game Hub
 **      window       game window
@@ -43,7 +50,9 @@ struct msf_hub_s {
     void *scenes;
     manifold_t *manifold;
     sound_buffer_t *sound_buffers;
+    image_t *images;
     sfSound *sound;
+    void *udata;
 };
 
 /*
@@ -61,6 +70,8 @@ void hub_add_scene(void *hub, void *scene, char *label);
 void hub_render(hub_t *hub);
 void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data);
 void hub_add_buffer(void *hub, void *buffer, char *label);
+sfBool hub_load_image(hub_t *hub, char *path, char *label);
+void hub_add_image(hub_t *hub, image_t *image, char *label);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);
@@ -81,5 +92,11 @@ void window_set_icon(sfRenderWindow *window, char *path);
 // WINDOW MET
 void window_clear(hub_t *hub);
 void window_render(hub_t *hub);
+
+// IMAGE TOR
+void *image_new(char *path);
+void image_ctor(void *image, char *path);
+void image_dtor(void *image);
+void image_destroy(void *image);
 
 #endif /* !MSF_HUB_H_ */

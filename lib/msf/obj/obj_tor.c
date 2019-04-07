@@ -50,6 +50,10 @@ void obj_dtor(void *obj)
         sfSound_stop(st_obj->sound);
         sfSound_destroy(st_obj->sound);
     }
+    if (st_obj->udata) {
+        ((udata_t *)st_obj->udata)->dtor(st_obj->udata);
+        free(st_obj->udata);
+    }
     physics_destroy(st_obj->physics);
 }
 

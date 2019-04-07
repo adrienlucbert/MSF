@@ -42,7 +42,7 @@ void scene_dtor(void *scene)
         sfSound_destroy(st_scene->sound);
     }
     if (st_scene->udata) {
-        ((udata_dtor_t *)st_scene->udata)->dtor(st_scene->udata);
+        ((udata_t *)st_scene->udata)->dtor(st_scene->udata);
         free(st_scene->udata);
     }
 }
