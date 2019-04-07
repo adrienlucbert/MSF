@@ -13,6 +13,10 @@ void *anim_new(hub_t *hub, char *image, int nb_frames)
 
     FAIL_IF(!st_anim || !hub || !image, NULL);
     anim_ctor((void *)st_anim, hub, image, nb_frames);
+    if (st_anim->frames == NULL) {
+        free(st_anim);
+        return (NULL);
+    }
     return ((void *)st_anim);
 }
 

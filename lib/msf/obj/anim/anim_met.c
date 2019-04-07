@@ -12,6 +12,7 @@ void anim_obj_add_anim(void *obj, void *anim, char *label)
 {
     anim_obj_t *st_obj = (anim_obj_t *)obj;
 
+    FAIL_IF_VOID(!obj || !anim);
     node_ctor(anim, label, NULL);
     list_append(&st_obj->anims, anim);
 }
