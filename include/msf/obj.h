@@ -144,6 +144,7 @@ struct msf_game_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 };
 
 /*
@@ -174,6 +175,7 @@ struct msf_text_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 
     sfText *text;
     sfFont *font;
@@ -208,6 +210,7 @@ struct msf_animated_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 
     sfSprite *sprite;
     sfInt64 elapsed;
@@ -269,6 +272,7 @@ struct msf_input_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 
     void *background;
     void *foreground;
@@ -298,6 +302,7 @@ struct msf_shape_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 
     void *shape;
 };
@@ -326,6 +331,7 @@ struct msf_sound_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
+    int disp_layer;
 
     sfInt64 elapsed;
     sfInt64 repeat_delay;

@@ -36,7 +36,6 @@ void hub_add_image(hub_t *hub, image_t *image, char *label)
     list_append((void **)(&hub->images), image);
 }
 
-
 void hub_add_buffer(void *hub, void *buffer, char *label)
 {
     hub_t *st_hub = (hub_t *)hub;

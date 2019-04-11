@@ -47,7 +47,7 @@ void scene_destroy(void *scene);
 
 // SCENE MET
 void scene_add_evt(void *scene, void *evt, char *label);
-void scene_add_obj(void *scene, void *obj, char *label);
+void scene_add_obj(void *scene, void *obj, char *label, int disp_layer);
 void scene_render(hub_t *hub, void *scene);
 void scene_clear_objs(scene_t *scene);
 
