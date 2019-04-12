@@ -36,7 +36,7 @@ void obj_ctor(void *obj, obj_type type, sfBool is_collider)
     st_obj->on_active = NULL;
     st_obj->sound = NULL;
     st_obj->is_alive = sfTrue;
-    st_obj->disp_layer = 0;
+    st_obj->z_index = 0;
 }
 
 void obj_dtor(void *obj)

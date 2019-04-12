@@ -144,7 +144,7 @@ struct msf_game_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 };
 
 /*
@@ -175,7 +175,7 @@ struct msf_text_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 
     sfText *text;
     sfFont *font;
@@ -210,7 +210,7 @@ struct msf_animated_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 
     sfSprite *sprite;
     sfInt64 elapsed;
@@ -272,7 +272,7 @@ struct msf_input_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 
     void *background;
     void *foreground;
@@ -302,7 +302,7 @@ struct msf_shape_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 
     void *shape;
 };
@@ -331,7 +331,7 @@ struct msf_sound_obj_s {
     sfSound *sound;
     int nbr;
     sfBool is_alive;
-    int disp_layer;
+    int z_index;
 
     sfInt64 elapsed;
     sfInt64 repeat_delay;
@@ -370,6 +370,7 @@ void obj_set_volume(void *obj, float volume);
 void objs_set_volume(void *obj, float volume);
 void obj_sound_apply(obj_t *obj, void (*func)(sfSound *));
 void objs_sound_apply(obj_t *obj, void (*func)(sfSound *));
+void obj_set_z_index(void **objs_list, void *obj, int z_index);
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);

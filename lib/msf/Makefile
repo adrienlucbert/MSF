@@ -33,6 +33,7 @@ SRC			=	utils/vector.c							\
 				obj/obj_met.c							\
 				obj/obj_set.c							\
 				obj/obj_set_s.c							\
+				obj/obj_set_t.c							\
 				obj/mouse_evt.c							\
 				obj/physics/physics_tor.c				\
 				obj/physics/physics_met.c				\
