@@ -148,6 +148,33 @@ struct msf_game_obj_s {
 };
 
 /*
+**  Game Object Container
+*/
+struct msf_obj_container_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
+    obj_fixing fixing;
+    obj_type type;
+    int group;
+    sfBool state;
+    sfBool is_collider;
+    obj_vtable_t *vtable;
+    obj_physics_t *physics;
+    obj_mouse_evt_t *mouse_evt;
+    void *udata;
+    void (*on_active)(hub_t *, void *);
+    sfSound *sound;
+    int nbr;
+    sfBool is_alive;
+    int z_index;
+
+    void *objs;
+};
+
+/*
 **  Text Game Object
 **      text        SFML text structure
 **      font        font of the text
@@ -402,6 +429,39 @@ sfBool manifold_collide(manifold_t *m);
 sfBool aabb_aabb_collision(manifold_t *m);
 sfBool circle_circle_collision(manifold_t *m);
 sfBool aabb_circle_collision(manifold_t *m, sfBool aabb_first);
+
+// OBJ CONTAINER TOR
+void *obj_container_new(void);
+void obj_container_ctor(void *obj_container);
+void obj_container_dtor(void *obj_container);
+void obj_container_destroy(void *obj_container);
+
+// OBJ CONTAINER MET
+void obj_container_add_obj(void *obj_container, void *obj, char *label, int z);
+void obj_container_render(void *obj_container, hub_t *hub);
+
+// OBJ CONTAINER SET
+void obj_container_set_origin(void *obj_container, sfVector2f origin);
+void obj_container_set_position(void *obj_container, sfVector2f position);
+void obj_container_set_rotation(void *obj_container, float angle);
+void obj_container_set_scale(void *obj_container, sfVector2f scale);
+void obj_container_set_size(void *obj_container, sfVector2u size);
+void obj_container_set_texture(void *obj, sfTexture *texture, sfBool reset);
+
+// OBJ CONTAINER GET
+sfVector2f obj_container_get_origin(void *obj_container);
+sfVector2f obj_container_get_position(void *obj_container);
+float obj_container_get_rotation(void *obj_container);
+sfVector2f obj_container_get_scale(void *obj_container);
+sfVector2u obj_container_get_size(void *obj_container);
+sfFloatRect obj_container_get_box(void *obj_container);
+const sfTexture *obj_container_get_texture(void *obj_container);
+
+// OBJ CONTAINER VTABLE
+void *obj_container_vtable_new(void);
+void obj_container_vtable_ctor_met(void *obj_vtable);
+void obj_container_vtable_ctor_set(void *obj_vtable);
+void obj_container_vtable_ctor_get(void *obj_vtable);
 
 // TEXT TOR
 void *text_obj_new(char *str, sfColor color, uint char_size);

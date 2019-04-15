@@ -18,7 +18,8 @@ SYSTEM		=	-l csfml-system
 AUDIO		=	-l csfml-audio
 NETWORK		=	-l csfml-network
 
-LDLIBS		=	-Llib -lmsf -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO) -lm
+CSFML		=	$(GRAPHICS) $(SYSTEM) $(AUDIO) $(WINDOW)
+LDLIBS		=	-Llib -lmsf -lmy $(CSFML) -lm
 INCLUDE		=	-Iinclude
 CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 

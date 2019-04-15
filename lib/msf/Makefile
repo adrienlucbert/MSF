@@ -93,6 +93,14 @@ SRC			=	utils/vector.c							\
 				obj/sound/sound_get.c					\
 				obj/sound/sound_vtable.c				\
 				obj/sound/sound_met.c					\
+				obj/container/container_tor.c			\
+				obj/container/container_met.c			\
+				obj/container/container_get_s.c			\
+				obj/container/container_get_t.c			\
+				obj/container/container_get.c			\
+				obj/container/container_set_s.c			\
+				obj/container/container_set_t.c			\
+				obj/container/container_vtable.c		\
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 
@@ -101,7 +109,7 @@ DEPS		=	../my
 NAME		=	libmsf.a
 PATHNAME	=	../$(NAME)
 
-CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio
+CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window
 LDLIBS		=	-L../ -lmy $(CSFML) -lm
 INCLUDE		=	-I../../include
 CFLAGS		=	-Wextra -Wall $(INCLUDE) $(LDLIBS)

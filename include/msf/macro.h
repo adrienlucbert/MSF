@@ -32,6 +32,7 @@
 
 #define KRELEASED(evt, keycode)\
 ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)
+#define KPRESSED(keycode) (sfKeyboard_isKeyPressed(keycode) ? 1 : 0)
 
 #define CLICK(evt, keycode)\
 ((evt.mouseButton.type == sfEvtMouseButtonReleased && \

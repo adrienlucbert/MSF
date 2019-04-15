@@ -10,6 +10,7 @@
 void menu_create(hub_t *hub)
 {
     scene_t *menu = scene_new();
+    obj_container_t *container = obj_container_new();
     shape_obj_t *rect = rect_new((sfVector2u){200, 100}, RGBA(50, 50, 50, 255));
     text_obj_t *text = text_obj_new("Button", sfWhite, 40);
     input_obj_t *box = input_obj_new(rect, text, (sfVector2f){800, 500});
@@ -18,9 +19,10 @@ void menu_create(hub_t *hub)
 
     rect_set_position(test, VECT2F(800, 510));
     rect_set_position(test2, VECT2F(810, 500));
-    scene_add_obj(menu, box, "input", 2);
-    scene_add_obj(menu, test2, "red", 0);
-    scene_add_obj(menu, test, "green", 1);
-    obj_set_z_index(&menu->objs, box, -1);
+    obj_container_add_obj(container, box, "input", 2);
+    obj_container_add_obj(container, test2, "red", 0);
+    obj_container_add_obj(container, test, "green", 1);
+    scene_add_obj(menu, container, "container", 0);
+    obj_set_z_index(&container->objs, box, -1);
     hub_add_scene(hub, menu, "menu");
 }

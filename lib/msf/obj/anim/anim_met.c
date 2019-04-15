@@ -6,7 +6,6 @@
 */
 
 #include "msf/msf.h"
-#include <stdio.h>
 
 void anim_obj_add_anim(void *obj, void *anim, char *label)
 {

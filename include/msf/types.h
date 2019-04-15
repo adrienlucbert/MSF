@@ -12,6 +12,7 @@ typedef struct msf_hub_s            hub_t;
 typedef struct msf_scene_s          scene_t;
 typedef struct msf_game_evt_s       evt_t;
 typedef struct msf_game_obj_s       obj_t;
+typedef struct msf_obj_container_s  obj_container_t;
 typedef struct msf_text_obj_s       text_obj_t;
 typedef struct msf_animated_obj_s   anim_obj_t;
 typedef struct msf_input_obj_s      input_obj_t;
