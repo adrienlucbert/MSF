@@ -9,6 +9,7 @@
 #define PROJECT_H_
 
 #include "msf/msf.h"
+#include <stdio.h>
 
 void menu_create(hub_t *hub);
 

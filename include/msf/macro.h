@@ -23,7 +23,8 @@
 #define VECT2F(x, y) (sfVector2f){x, y}
 #define VECT2U(x, y) (sfVector2u){x, y}
 #define VECT2I(x, y) (sfVector2i){x, y}
-#define RECT(left, top, width, height) (sfFloatRect){left, top, width, height}
+#define RECT2I(left, top, width, height) (sfIntRect){left, top, width, height}
+#define RECT2F(left, top, width, height) (sfFloatRect){left, top, width, height}
 #define RGBA(R, G, B, A) (sfColor){R, G, B, A}
 
 #define VFUNC(THIS, FUNC, ...) if (THIS && ((obj_t *)THIS)->vtable->FUNC) \

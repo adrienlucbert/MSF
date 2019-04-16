@@ -14,10 +14,12 @@ void anim_set_frames(void *anim, hub_t *hub, char *image, int nb_frames)
     image_t *st_image = hub && image ? list_fetch(hub->images, image) : NULL;
     sfImage *sheet = st_image ? st_image->sheet : NULL;
     sfVector2u size = sheet ? sfImage_getSize(sheet) : VECT2U(0, 0);
-    sfIntRect area = {0, 0, size.x / nb_frames, size.y};
+    sfIntRect area;
     sfTexture *texture = NULL;
     int frame_id = 0;
 
+    FAIL_IF_VOID(nb_frames <= 0);
+    area = RECT2I(0, 0, size.x / nb_frames, size.y);
     FAIL_IF_VOID(!hub || !image || !st_image || !sheet);
     while (frame_id < nb_frames) {
         texture = sfTexture_createFromImage(sheet, &area);

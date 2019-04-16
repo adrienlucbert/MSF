@@ -13,6 +13,7 @@ static int pop_obj_from_list(void **begin, obj_t *st_obj)
     obj_t *prev = NULL;
     obj_t *next = *begin;
 
+    FAIL_IF(!*begin, 0);
     if (tmp == st_obj) {
         while (list_poll(*begin, (void **)&next)) {}
         FAIL_IF(next == st_obj, 0);

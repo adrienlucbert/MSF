@@ -57,8 +57,3 @@ void obj_container_vtable_ctor_get(void *obj_vtable)
     st_obj_vtable->get_texture = obj_container_get_texture;
     st_obj_vtable->get_box = obj_container_get_box;
 }
-
-void anim_vtable_destroy(void *obj_vtable)
-{
-    free(obj_vtable);
-}
