@@ -98,7 +98,6 @@ SRC			=	utils/vector.c							\
 				obj/container/container_get_s.c			\
 				obj/container/container_get_t.c			\
 				obj/container/container_get.c			\
-				obj/container/container_set_s.c			\
 				obj/container/container_set_t.c			\
 				obj/container/container_vtable.c		\
 

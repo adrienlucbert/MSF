@@ -38,7 +38,7 @@ void obj_container_vtable_ctor_set(void *obj_vtable)
     st_obj_vtable->set_scale = obj_container_set_scale;
     st_obj_vtable->set_size = obj_container_set_size;
     st_obj_vtable->set_radius = NULL;
-    st_obj_vtable->set_texture = obj_container_set_texture;
+    st_obj_vtable->set_texture = NULL;
 }
 
 void obj_container_vtable_ctor_get(void *obj_vtable)

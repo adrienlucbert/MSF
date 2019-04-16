@@ -22,6 +22,7 @@ void obj_container_ctor(void *obj_container)
 
     FAIL_IF_VOID(!st_obj_container);
     obj_ctor(st_obj_container, animated, sfTrue);
+    st_obj_container->type = container;
     st_obj_container->objs = NULL;
     st_obj_container->vtable = obj_container_vtable_new();
     st_obj_container->physics = physics_new(obj_container);

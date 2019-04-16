@@ -14,6 +14,7 @@
 **  ENUMS
 */
 enum msf_obj_type_e {
+    container,
     text,
     animated,
     input,
@@ -446,7 +447,6 @@ void obj_container_set_position(void *obj_container, sfVector2f position);
 void obj_container_set_rotation(void *obj_container, float angle);
 void obj_container_set_scale(void *obj_container, sfVector2f scale);
 void obj_container_set_size(void *obj_container, sfVector2u size);
-void obj_container_set_texture(void *obj, sfTexture *texture, sfBool reset);
 
 // OBJ CONTAINER GET
 sfVector2f obj_container_get_origin(void *obj_container);
