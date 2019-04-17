@@ -33,6 +33,7 @@ void hub_add_image(hub_t *hub, image_t *image, char *label)
 {
     FAIL_IF_VOID(!hub || !image);
     image->label = my_memdup(label, -1);
+    image->next = image;
     list_append((void **)(&hub->images), image);
 }
 

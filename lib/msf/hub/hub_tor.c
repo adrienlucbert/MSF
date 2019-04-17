@@ -33,6 +33,7 @@ void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     st_hub->manifold = manifold_new(NULL, NULL);
     st_hub->sound = NULL;
     st_hub->sound_buffers = NULL;
+    st_hub->images = NULL;
 }
 
 void hub_dtor(void *hub)
