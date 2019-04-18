@@ -11,7 +11,6 @@ int my_atoi(char const *str)
 {
     int sign = 1;
     int index = 0;
-    int intmax = INT_MAX;
     int nb = 0;
 
     if (!str)
@@ -21,7 +20,7 @@ int my_atoi(char const *str)
         ++index;
     }
     while (str[index] >= '0' && str[index] <= '9') {
-        if (nb > intmax)
+        if (nb < 0)
             return (0);
         nb *= 10;
         nb += str[index] - 48;
