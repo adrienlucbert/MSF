@@ -5,7 +5,7 @@ library for graphics and audio.
 
 ## :checkered_flag: Context
 
-Is was carried out during our first year of study at Epitech, to help us build games (runner,
+It was carried out during our first year of study at Epitech, to help us build games (runner,
 tower defense, role-play game). It uses some concepts of modular C and object-oriented
 programming to write generic code, easier to maintain and improve.
 
